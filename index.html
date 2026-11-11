@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0F172A" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="TN CAC Guide" />
+  <title>TN CAC Statutory Reference Guide</title>
+  <link id="pwa-manifest" rel="manifest" />
+  <link id="apple-icon" rel="apple-touch-icon" />
+  <style>
+    :root {
+      --navy: #0F172A;
+      --slate-dark: #1E293B;
+      --slate-muted: #475569;
+      --slate-subtle: #64748B;
+      --bg-app: #F1F5F9;
+      --bg-surface: #FFFFFF;
+      --bg-class: #F4F6F9;
+      --border-card: #CBD5E1;
+      --border-inner: #E2E8F0;
+      --royal-blue: #1D4ED8;
+      --royal-blue-bg: #EFF6FF;
+      --royal-blue-border: #BFDBFE;
+      --tap-bar-bg: #DCE8FA;
+      --tap-bar-hover: #CFE0F8;
+      --color-probation: #166534;
+      --color-release: #B91C1C;
+      --color-sor: #4338CA;
+      --color-csl: #C2410C;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, Helvetica, Arial, sans-serif;
+      background-color: var(--bg-app);
+      color: var(--slate-dark);
+      line-height: 1.42;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Sticky Top Chrome */
+    .app-chrome {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg-surface);
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+    }
+
+    .app-header {
+      background-color: var(--navy);
+      color: #FFFFFF;
+      padding: calc(12px + env(safe-area-inset-top)) 16px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .app-title-wrap {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .app-title {
+      margin: 0;
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: #FFFFFF;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .offline-pill {
+      font-size: 11px;
+      font-weight: 600;
+      color: #93C5FD;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(147, 197, 253, 0.28);
+      padding: 3px 8px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .expand-all-btn {
+      font-size: 11.5px;
+      font-weight: 600;
+      color: #F8FAFC;
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 7px;
+      padding: 4px 9px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .expand-all-btn:active {
+      background: rgba(255, 255, 255, 0.24);
+    }
+
+    /* 4-Tab Bar */
+    .tab-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      background: #FFFFFF;
+      border-bottom: 1px solid var(--border-inner);
+    }
+
+    .tab-btn {
+      appearance: none;
+      background: none;
+      border: none;
+      border-bottom: 3px solid transparent;
+      padding: 11px 4px 9px;
+      font-size: 12.5px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      color: var(--slate-subtle);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      transition: color 0.15s ease, border-color 0.15s ease;
+    }
+
+    .tab-btn.active {
+      color: var(--royal-blue);
+      border-bottom-color: var(--royal-blue);
+    }
+
+    .tab-count {
+      font-size: 10.5px;
+      font-weight: 700;
+      padding: 1px 5px;
+      border-radius: 999px;
+      background: #F1F5F9;
+      color: var(--slate-muted);
+    }
+
+    .tab-btn.active .tab-count {
+      background: var(--royal-blue-bg);
+      color: var(--royal-blue);
+    }
+
+    /* Search Bar */
+    .search-bar-wrap {
+      padding: 10px 14px;
+      background: #FFFFFF;
+      border-bottom: 1px solid var(--border-inner);
+    }
+
+    .search-input-box {
+      position: relative;
+      display: flex;
+      align-items: center;
+      background: #F1F5F9;
+      border: 1px solid #E2E8F0;
+      border-radius: 10px;
+      padding: 0 10px;
+    }
+
+    .search-input-box:focus-within {
+      background: #FFFFFF;
+      border-color: var(--royal-blue);
+      box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.12);
+    }
+
+    .search-icon {
+      color: var(--slate-subtle);
+      font-size: 15px;
+      margin-right: 8px;
+      user-select: none;
+    }
+
+    .search-input {
+      width: 100%;
+      border: none;
+      background: transparent;
+      padding: 9px 0;
+      font-size: 14.5px;
+      color: var(--navy);
+      outline: none;
+    }
+
+    .search-input::placeholder {
+      color: #64748B;
+    }
+
+    .clear-search-btn {
+      appearance: none;
+      border: none;
+      background: #CBD5E1;
+      color: #1E293B;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      margin-left: 6px;
+    }
+
+    .clear-search-btn.visible {
+      display: flex;
+    }
+
+    .search-meta-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 7px;
+      font-size: 12px;
+      color: var(--slate-muted);
+    }
+
+    .scope-toggle {
+      display: inline-flex;
+      background: #F1F5F9;
+      border-radius: 7px;
+      padding: 2px;
+      gap: 2px;
+    }
+
+    .scope-btn {
+      border: none;
+      background: transparent;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--slate-muted);
+      padding: 3px 8px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .scope-btn.active {
+      background: #FFFFFF;
+      color: var(--royal-blue);
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.08);
+    }
+
+    /* Main Container */
+    .main-container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 14px 12px calc(32px + env(safe-area-inset-bottom));
+    }
+
+    /* Offense Card Design */
+    .offense-card {
+      background: var(--bg-surface);
+      border: 1.5px solid var(--border-card);
+      border-radius: 14px;
+      margin-bottom: 14px;
+      overflow: hidden;
+      box-shadow: 0 1px 4px rgba(15, 23, 42, 0.05);
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .offense-card.expanded {
+      border-color: #93C5FD;
+      box-shadow: 0 4px 14px rgba(29, 78, 216, 0.09);
+    }
+
+    .card-face {
+      padding: 14px 14px 12px;
+      cursor: pointer;
+    }
+
+    .card-header-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .offense-title {
+      margin: 0;
+      font-size: 17.5px;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.25;
+    }
+
+    .cat-badge {
+      font-size: 10.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 2px 7px;
+      border-radius: 6px;
+      background: #F1F5F9;
+      color: var(--slate-muted);
+      border: 1px solid #E2E8F0;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    /* Option 1 Royal Blue Statute Pill */
+    .tca-badge {
+      display: inline-block;
+      margin-top: 7px;
+      padding: 3px 9px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--royal-blue);
+      background-color: var(--royal-blue-bg);
+      border: 1px solid var(--royal-blue-border);
+      border-radius: 7px;
+      letter-spacing: 0.01em;
+    }
+
+    /* Classification Box (No Section Title) */
+    .class-box {
+      margin-top: 11px;
+      background-color: var(--bg-class);
+      border: 1px solid var(--border-inner);
+      border-radius: 9px;
+      padding: 9px 11px;
+    }
+
+    /* Bullet Lines with Hanging Indents */
+    .line-list {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .bullet-line {
+      font-size: 13.5px;
+      line-height: 1.38;
+      padding-left: 1.05em;
+      text-indent: -1.05em;
+      word-break: break-word;
+    }
+
+    .bullet-line.lvl-1 {
+      padding-left: 2.05em;
+      text-indent: -1.0em;
+    }
+
+    .bullet-line.lvl-2 {
+      padding-left: 3.05em;
+      text-indent: -1.0em;
+    }
+
+    .class-box .bullet-line {
+      color: var(--slate-dark);
+      font-weight: 500;
+    }
+
+    /* 2-Column Color-Coded Sentencing & Registry Grid (No Section Titles) */
+    .quadrant-split {
+      margin-top: 11px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border-inner);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+
+    .split-col-left {
+      padding-right: 10px;
+      border-right: 1px solid var(--border-inner);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .split-col-right {
+      padding-left: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .q-probation .bullet-line {
+      color: var(--color-probation);
+      font-weight: 700;
+      font-size: 13.2px;
+    }
+
+    .q-release .bullet-line {
+      color: var(--color-release);
+      font-weight: 700;
+      font-size: 13.2px;
+    }
+
+    .q-sor .bullet-line {
+      color: var(--color-sor);
+      font-weight: 700;
+      font-size: 13.2px;
+    }
+
+    .q-csl .bullet-line {
+      color: var(--color-csl);
+      font-weight: 700;
+      font-size: 13.2px;
+    }
+
+    /* Collapsible Accordion Drawer */
+    .accordion-drawer {
+      display: none;
+      border-top: 1px solid var(--border-inner);
+      background: #FFFFFF;
+    }
+
+    .offense-card.expanded .accordion-drawer {
+      display: block;
+    }
+
+    .drawer-section {
+      padding: 12px 14px;
+    }
+
+    .drawer-section + .drawer-section {
+      border-top: 1px solid var(--border-inner);
+      background: #FAFCFF;
+    }
+
+    .drawer-label {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--royal-blue);
+      margin: 0 0 8px 0;
+    }
+
+    .drawer-section .bullet-line {
+      color: var(--navy);
+      font-size: 13.8px;
+      line-height: 1.44;
+    }
+
+    .note-subheading {
+      font-size: 13.8px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-top: 8px;
+      margin-bottom: 4px;
+    }
+
+    .note-subheading:first-child {
+      margin-top: 0;
+    }
+
+    .note-spacer {
+      height: 5px;
+    }
+
+    /* Bottom Tap Drawer Bar */
+    .tap-bar {
+      width: 100%;
+      appearance: none;
+      border: none;
+      border-top: 1px solid #C7D9F5;
+      background-color: var(--tap-bar-bg);
+      color: var(--royal-blue);
+      font-size: 13px;
+      font-weight: 700;
+      padding: 10px 12px;
+      text-align: center;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: background-color 0.12s ease;
+    }
+
+    .tap-bar:hover {
+      background-color: var(--tap-bar-hover);
+    }
+
+    /* Quick Reference Guides View */
+    .guide-filter-row {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .guide-pill {
+      appearance: none;
+      border: 1px solid var(--border-card);
+      background: #FFFFFF;
+      color: var(--slate-dark);
+      font-size: 12.5px;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 999px;
+      cursor: pointer;
+    }
+
+    .guide-pill.active {
+      background: var(--navy);
+      color: #FFFFFF;
+      border-color: var(--navy);
+    }
+
+    .guide-card {
+      background: #FFFFFF;
+      border: 1.5px solid var(--border-card);
+      border-radius: 14px;
+      margin-bottom: 16px;
+      overflow: hidden;
+      box-shadow: 0 1px 4px rgba(15, 23, 42, 0.05);
+    }
+
+    .guide-card-header {
+      background: var(--navy);
+      color: #FFFFFF;
+      padding: 12px 14px;
+      border-bottom: 3px solid var(--royal-blue);
+    }
+
+    .guide-card-title {
+      margin: 0;
+      font-size: 16.5px;
+      font-weight: 700;
+    }
+
+    .guide-section {
+      border-top: 1px solid var(--border-inner);
+    }
+
+    .guide-section:first-of-type {
+      border-top: none;
+    }
+
+    .guide-sec-hdr {
+      background: #F1F5F9;
+      padding: 9px 14px;
+      border-bottom: 1px solid var(--border-inner);
+      font-size: 13.8px;
+      font-weight: 700;
+      color: var(--navy);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .guide-sec-body {
+      padding: 10px 14px 12px;
+    }
+
+    .guide-subhdr {
+      background: #F8FAFC;
+      border-top: 1px solid var(--border-inner);
+      border-bottom: 1px solid var(--border-inner);
+      padding: 6px 10px;
+      margin: 10px -14px 8px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .guide-subhdr:first-child {
+      margin-top: -10px;
+      border-top: none;
+    }
+
+    .guide-item {
+      font-size: 13.5px;
+      line-height: 1.42;
+      color: var(--slate-dark);
+      padding-left: 1.05em;
+      text-indent: -1.05em;
+      margin-bottom: 5px;
+    }
+
+    .guide-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .guide-bullet {
+      color: var(--royal-blue);
+      font-weight: 800;
+    }
+
+    .guide-qualifier {
+      font-size: 12.8px;
+      font-style: italic;
+      color: var(--slate-muted);
+      padding-left: 1.85em;
+      text-indent: -0.75em;
+      margin-top: -2px;
+      margin-bottom: 6px;
+    }
+
+    .statute-inline-badge {
+      display: inline-block;
+      padding: 1px 6px;
+      font-size: 12.2px;
+      font-weight: 700;
+      color: var(--royal-blue);
+      background: var(--royal-blue-bg);
+      border: 1px solid var(--royal-blue-border);
+      border-radius: 5px;
+      text-indent: 0;
+    }
+
+    .paren-muted {
+      font-style: italic;
+      color: var(--slate-muted);
+      font-size: 12.8px;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 40px 20px;
+      background: #FFFFFF;
+      border: 1px dashed var(--border-card);
+      border-radius: 14px;
+      color: var(--slate-muted);
+    }
+
+    .empty-state h3 {
+      margin: 0 0 6px;
+      color: var(--navy);
+      font-size: 16px;
+    }
+
+    .empty-state p {
+      margin: 0;
+      font-size: 13.5px;
+    }
+  </style>
+</head>
+<body>
+  <header class="app-chrome">
+    <div class="app-header">
+      <div class="app-title-wrap">
+        <h1 class="app-title">TN CAC Statutory Reference Guide</h1>
+      </div>
+      <div class="header-actions">
+        <span class="offline-pill" id="offline-status">Offline Ready</span>
+        <button type="button" class="expand-all-btn" id="expand-all-btn">Expand All</button>
+      </div>
+    </div>
+
+    <nav class="tab-bar" role="tablist">
+      <button type="button" class="tab-btn active" data-tab="Physical" role="tab">
+        PHYSICAL <span class="tab-count" id="count-Physical">21</span>
+      </button>
+      <button type="button" class="tab-btn" data-tab="Sexual" role="tab">
+        SEXUAL <span class="tab-count" id="count-Sexual">30</span>
+      </button>
+      <button type="button" class="tab-btn" data-tab="CSAM" role="tab">
+        CSAM <span class="tab-count" id="count-CSAM">3</span>
+      </button>
+      <button type="button" class="tab-btn" data-tab="Guides" role="tab">
+        GUIDES <span class="tab-count">3</span>
+      </button>
+    </nav>
+
+    <div class="search-bar-wrap">
+      <div class="search-input-box">
+        <span class="search-icon" aria-hidden="true">&#128269;</span>
+        <input
+          type="search"
+          id="search-input"
+          class="search-input"
+          placeholder="Search offense, T.C.A. §, class, elements, or guides..."
+          autocomplete="off"
+          autocorrect="off"
+          spellcheck="false"
+        />
+        <button type="button" id="clear-search-btn" class="clear-search-btn" aria-label="Clear search">&times;</button>
+      </div>
+      <div class="search-meta-bar" id="search-meta-bar" style="display: none;">
+        <span id="search-result-label">Showing matches</span>
+        <div class="scope-toggle">
+          <button type="button" class="scope-btn active" data-scope="all">All Categories</button>
+          <button type="button" class="scope-btn" data-scope="tab">Current Tab Only</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-container" id="main-container"></main>
+
+  <script>
+    const OFFENSES = [{"id": 1, "name": "Child Abuse", "tca": "39-15-401(a)", "category": "Physical", "classLines": [{"text": "• E Felony (victim over 8)", "level": 0}, {"text": "• D Felony (victim 8 or younger)", "level": 0}], "probation": [{"text": "• Probation Eligible - Yes", "level": 0}], "release": [{"text": "• Release Eligibility - 100% (attempt included)", "level": 0}], "sor": [{"text": "• Sex Offender Registry: No", "level": 0}], "csl": [{"text": "• Community Supervision for Life: No", "level": 0}], "elements": [{"text": "• Knowingly", "level": 0}, {"text": "• Victim under 18 years of age", "level": 0}, {"text": "• Other than by accidental means", "level": 0}, {"text": "• Treats the child in a manner that inflicts injury", "level": 0}], "notes": [{"text": "Special Definitions:", "level": 0}, {"text": "• \"Injury\" includes:", "level": 0}, {"text": "○ A cut", "level": 1}, {"text": "○ Abrasion", "level": 1}, {"text": "○ Bruise", "level": 1}, {"text": "○ Burn", "level": 1}, {"text": "○ Disfigurement", "level": 1}, {"text": "○ Physical pain", "level": 1}, {"text": "○ Temporary illness", "level": 1}, {"text": "○ Temporary impairment of the function of a bodily member, organ, or mental faculty", "level": 1}]}, {"id": 2, "name": "Child Neglect", "tca": "39-15-401(b)", "category": "Physical", "classLines": [{"text": "• A Misdemeanor (victim over 8)", "level": 0}, {"text": "• E Felony (victim 8 or younger)", "level": 0}], "probation": [{"text": "• Probation Eligible - Yes", "level": 0}], "release": [{"text": "• Release Eligibility - 100% (attempt included)", "level": 0}], "sor": [{"text": "• Sex Offender Registry: No", "level": 0}], "csl": [{"text": "• Community Supervision for Life: No", "level": 0}], "elements": [{"text": "• Knowingly", "level": 0}, {"text": "• Victim under 18 years of age", "level": 0}, {"text": "• Abuses or neglects the child", "level": 0}, {"text": "• Adversely affects the child's health and welfare", "level": 0}], "notes": [{"text": "Special Notes:", "level": 0}, {"text": "• “Adversely affects the child's health and welfare” may include, but is not limited to:", "level": 0}, {"text": "○ Adverse effects on the emotional and mental health and welfare of the child", "level": 1}, {"text": "○ The natural effects of starvation or dehydration", "level": 1}, {"text": "○ Acts of female genital mutilation", "level": 1}, {"text": "• To constitute neglect, the State must prove beyond a reasonable doubt that there was an actual adverse effect to the child's health and welfare. A mere risk of harm is insufficient.", "level": 0}, {"text": "• Neglect is a continuing course of conduct beginning with the first act or omission that causes an adverse effect to the child's health and welfare and may be established by an act of commission or omission.", "level": 0}]}, {"id": 3, "name": "Child Endangerment - Expose to Abuse or Neglect / Imminent Danger", "tca": "39-15-401(c)(1)(A)", "category": "Physical", "classLines": [{"text": "• A Misdemeanor", "level": 0}], "probation": [{"text": "• Probation Eligible - Yes", "level": 0}], "release": [{"text": "• Release Eligibility - 100% (attempt included)", "level": 0}], "sor": [{"text": "• Sex Offender Registry: No", "level": 0}], "csl": [{"text": "• Community Supervision for Life: No", "level": 0}], "elements": [{"text": "• Parent or custodian", "level": 0}, {"text": "• Victim 8 years of age or younger", "level": 0}, {"text": "• Either:", "level": 0}, {"text": "○ Knowingly exposes the child to abuse or neglect", "level": 2}, {"text": "○ Knowingly fails to protect the child from abuse or neglect", "level": 2}, {"text": "• Results in physical injury or imminent danger", "level": 0}], "notes": [{"text": "Special Definitions:", "level": 0}, {"text": "• “Imminent danger” means the existence of any condition or practice that could reasonably be expected to cause death or serious bodily injury", "level": 0}, {"text": "• “Knowingly” means the person knew, or should have known upon a reasonable inquiry, that abuse to or neglect of the child would occur which would result in physical injury to the child. The risk must be of such a nature and degree that the failure to perceive it constitutes a gross deviation from the standard of care that an ordinary parent or legal custodian of a child eight (8) years of age or less would exercise under all the circumstances as viewed from the defendant's standpoint", "level": 0}, {"text": "• “Parent or custodian” means the biological or adoptive parent or any person who has legal custody of the child", "level": 0}]}, {"id": 4, "name": "Child Endangerment - Allow Sex Offender Access", "tca": "39-15-401(c)(2)", "category": "Physical", "classLines": [{"text": "• A Misdemeanor", "level": 0}], "probation": [{"text": "• Probation Eligible - Yes", "level": 0}], "release": [{"text": "• Release Eligibility - 100% (attempt included)", "level": 0}], "sor": [{"text": "• Sex Offender Registry: No", "level": 0}], "csl": [{"text": "• Community Supervision for Life: No", "level": 0}], "elements": [{"text": "• Parent or guardian", "level": 0}, {"text": "• Victim under 18 years of age", "level": 0}, {"text": "• Either:", "level": 0}, {"text": "○ Knowingly allows the child to be under the care or supervision of a registered offender", "level": 1}, {"text": "○ Knowingly allows the child to be unaccompanied with a registered sexual offender", "level": 1}], "notes": []}, {"id": 5, "name": "Child Endangerment - Controlled Substance Exposure", "tca": "39-15-401(d)(1)", "category": "Physical", "classLines": [{"text": "• A Misdemeanor (victim over 8)", "level": 0}, {"text": "• B Felony (victim 8 or younger)", "level": 0}], "probation": [{"text": "• Probation Eligible - Yes", "level": 0}], "release": [{"text": "• Release Eligibility - 100% (attempt included)", "level": 0}], "sor": [{"text": "• Sex Offender Registry: No", "level": 0}], "csl": [{"text": "• Community Supervision for Life: No", "level": 0}], "elements": [{"text": "• Negligently", "level": 0}, {"text": "• By act or omission", "level": 0}, {"text": "• Engages in conduct that places a child in imminent danger of death, bodily injury, or physical or mental impairment", "level": 0}, {"text": "• \"Engages in conduct\" language means: Conduct related to methamphetamine or another controlled substance other than Schedule VI exposes the child to the controlled substance", "level": 0}, {"text": "• Analysis of a specimen of the child's blood, hair, fingernail, urine, or other bodily substance indicates the presence of the substance in the child's body", "level": 0}], "notes": []}, {"id": 6, "name": "Child Endangerment - Fentanyl Exposure", "tca": "39-15-401(d)(2)", "category": "Physical", "classLines": [{"text": "• E Felony (victim over 8)", "level": 0}, {"text": "• B Felony (victim 8 or younger)", "level": 0}], "probation": [{"text": "• Probation Eligible - Yes", "level": 0}], "release": [{"text": "• Release Eligibility - 100% (attempt included)", "level": 0}], "sor": [{"text": "• Sex Offender Registry: No", "level": 0}], "csl": [{"text": "• Community Supervision for Life: No", "level": 0}], "elements": [{"text": "• Knowingly", "level": 0}, {"text": "• By act or omission", "level": 0}, {"text": "• Engages in conduct that places a child in imminent danger of death, bodily injury, or physical or mental impairment", "level": 0}, {"text": "• \"Engages in conduct\" language means: Unlawfully exposes the child to fentanyl, carfentanil, remifentanil, alfentanil, thiafentanil, or a fentanyl derivative or analogue", "level": 0}, {"text": "• Analysis of a specimen of the child's blood, hair, fingernail, urine, or other bodily substance indicates the presence of the substance in the child's body", "level": 0}], "notes": []}, {"id": 7, "name": "Aggravated Child Abuse", "tca": "39-15-402(a)", "category": "Physical", "classLines": [{"text": "• B Felony", "level": 0}, {"text": "• A Felony (victim 8 years of age or younger)", "level": 0}, {"text": "• A Felony (victim is mentally defective, mentally incapacitated, or suffers from a physical disability)", "level": 0}], "probation": [{"text": "• Probation Eligible - No", "level": 0}], "release": [{"text": "• Release Eligibility - 100% (attempt included)", "level": 0}], "sor": [{"text": "• Sex Offender Registry: No", "level": 0}], "csl": [{"text": "• Community Supervision for Life: No", "level": 0}], "elements": [{"text": "• Commits child abuse", "level": 0}, {"text": "• One of the following:", "level": 0}, {"text": "○ The act of abuse results in serious bodily injury to the child", "level": 1}, {"text": "○ A deadly weapon, dangerous instrumentality, controlled substance, or controlled substance analogue is used to accomplish the act of abuse", "level": 1}, {"text": "○ The act of abuse was especially heinous, atrocious, or cruel", "level": 1}, {"text": "○ The act of abuse involved strangulation", "level": 1}, {"text": "○ The act of abuse involved the infliction of torture to the victim", "level": 1}, {"text": "○ The act of abuse results from the knowing exposure of a child to the initiation of a process intended to result in the manufacture of methamphetamine", "level": 1}], "notes": [{"text": "Special Definitions:", "level": 0}, {"text": "• \"Dangerous instrumentality\" means any item that, in the manner of its use or intended use as applied to a child, is capable of producing serious bodily injury to a child.", "level": 0}, {"text": "• \"Deadly weapon\" means:", "level": 0}, {"text": "○ A firearm or anything manifestly designed, made, or adapted for the purpose of inflicting death or serious bodily injury; or", "level": 1}, {"text": "○ Anything that, in the manner of its use or intended use, is capable of causing death or serious bodily injury.", "level": 1}, {"text": "• \"Heinous\" means grossly wicked or reprehensible; abominable; odious; vile.", "level": 0}, {"text": "• \"Atrocious\" means extremely evil or cruel; monstrous; exceptionally bad; abominable.", "level": 0}, {"text": "• \"Cruel\" means disposed to inflict pain or suffering; causing suffering; painful.", "level": 0}, {"text": "• \"Injury\" includes:", "level": 0}, {"text": "○ A cut", "level": 1}, {"text": "○ Abrasion", "level": 1}, {"text": "○ Bruise", "level": 1}, {"text": "○ Burn", "level": 1}, {"text": "○ Disfigurement", "level": 1}, {"text": "○ Physical pain", "level": 1}, {"text": "○ Temporary illness", "level": 1}, {"text": "○ Temporary impairment of the function of a bodily member, organ, or mental faculty", "level": 1}, {"text": "• \"Serious bodily injury to the child\" means bodily injury involving:", "level": 0}, {"text": "○ A substantial risk of death", "level": 1}, {"text": "○ Protracted unconsciousness", "level": 1}, {"text": "○ Extreme physical pain", "level": 1}, {"text": "○ Protracted or obvious disfigurement", "level": 1}, {"text": "○ Protracted loss or substantial impairment of a function of a bodily member, organ, or mental faculty", "level": 1}, {"text": "○ A broken bone of a child who is twelve (12) years of age or less", "level": 1}, {"text": "• Includes, but is not limited to:", "level": 0}, {"text": "○ Second or third degree burns", "level": 1}, {"text": "○ A fracture of any bone", "level": 1}, {"text": "○ A concussion", "level": 1}, {"text": "○ Subdural bleeding", "level": 1}, {"text": "○ Subarachnoid bleeding", "level": 1}, {"text": "○ Retinal hemorrhage", "level": 1}, {"text": "○ Cerebral edema", "level": 1}, {"text": "○ Brain contusion", "level": 1}, {"text": "○ Injuries to the skin involving severe bruising or the likelihood of permanent or protracted disfigurement, including injuries sustained by whipping a child with objects", "level": 1}, {"text": "• \"Torture\" means the infliction of severe physical or mental pain upon the victim while the victim remains alive and conscious.", "level": 0}, {"text": "Special Notes:", "level": 0}, {"text": "• Upon conviction for aggravated child abuse, the court may order the defendant to refrain from any contact with the victim, including attempted contact through internet services or social networking websites, if the defendant has no parental rights to the victim.", "level": 0}, {"text": "• Upon conviction for aggravated child abuse, the court shall order the defendant to undergo a mental health evaluation prior to sentencing.", "level": 0}]}, {"id": 8, "name": "Aggravated Child Neglect", "tca": "39-15-402(a)", "category": "Physical", "classLines": [{"text": "• B Felony", "level": 0}, {"text": "• A Felony (victim 8 years of age or younger)", "level": 0}, {"text": "• A Felony (victim is mentally defective, mentally incapacitated, or suffers from a physical disability)", "level": 0}], "probation": [{"text": "• Probation Eligible - No", "level": 0}], "release": [{"text": "• Release Eligibility - 100% (attempt included)", "level": 0}], "sor": [{"text": "• Sex Offender Registry: No", "level": 0}], "csl": [{"text": "• Community Supervision for Life: No", "level": 0}], "elements": [{"text": "• Commits child neglect", "level": 0}, {"text": "• One of the following:", "level": 0}, {"text": "○ The act of neglect results in serious bodily injury to the child", "level": 1}, {"text": "○ A deadly weapon, dangerous instrumentality, controlled substance, or controlled substance analogue is used to accomplish the act of neglect", "level": 1}, {"text": "○ The act of neglect was especially heinous, atrocious, or cruel", "level": 1}, {"text": "○ The act of neglect involved strangulation", "level": 1}, {"text": "○ The act of neglect involved the infliction of torture to the victim", "level": 1}, {"text": "○ The act of neglect results from the knowing exposure of a child to the initiation of a process intended to result in the manufacture of methamphetamine", "level": 1}], "notes": [{"text": "Special Definitions:", "level": 0}, {"text": "• \"Dangerous instrumentality\" means any item that, in the manner of its use or intended use as applied to a child, is capable of producing serious bodily injury to a child.", "level": 0}, {"text": "• \"Deadly weapon\" means:", "level": 0}, {"text": "○ A firearm or anything manifestly designed, made, or adapted for the purpose of inflicting death or serious bodily injury; or", "level": 1}, {"text": "○ Anything that, in the manner of its use or intended use, is capable of causing death or serious bodily injury.", "level": 1}, {"text": "• \"Heinous\" means grossly wicked or reprehensible; abominable; odious; vile.", "level": 0}, {"text": "• \"Atrocious\" means extremely evil or cruel; monstrous; exceptionally bad; abominable.", "level": 0}, {"text": "• \"Cruel\" means disposed to inflict pain or suffering; causing suffering; painful.", "level": 0}, {"text": "• \"Injury\" includes:", "level": 0}, {"text": "○ A cut", "level": 1}, {"text": "○ Abrasion", "level": 1}, {"text": "○ Bruise", "level": 1}, {"text": "○ Burn", "level": 1}, {"text": "○ Disfigurement", "level": 1}, {"text": "○ Physical pain", "level": 1}, {"text": "○ Temporary illness", "level": 1}, {"text": "○ Temporary impairment of the function of a bodily member, organ, or mental faculty", "level": 1}, {"text": "• \"Serious bodily injury to the child\" means bodily injury involving:", "level": 0}, {"text": "○ A substantial risk of death", "level": 1}, {"text": "○ Protracted unconsciousness", "level": 1}, {"text": "○ Extreme physical pain", "level": 1}, {"text": "○ Protracted or obvious disfigurement", "level": 1}, {"text": "○ Protracted loss or substantial impairment of a function of a bodily member, organ, or mental faculty", "level": 1}, {"text": "○ A broken bone of a child who is twelve (12) years of age or less", "level": 1}, {"text": "• Includes, but is not limited to:", "level": 0}, {"text": "○ Second or third degree burns", "level": 1}, {"text": "○ A fracture of any bone", "level": 1}, {"text": "○ A concussion", "level": 1}, {"text": "○ Subdural bleeding", "level": 1}, {"text": "○ Subarachnoid bleeding", "level": 1}, {"text": "○ Retinal hemorrhage", "level": 1}, {"text": "○ Cerebral edema", "level": 1}, {"text": "○ Brain contusion", "level": 1}, {"text": "○ Injuries to the skin involving severe bruising or the likelihood of permanent or protracted disfigurement, including injuries sustained by whipping a child with objects", "level": 1}, {"text": "• \"Torture\" means the infliction of severe physical or mental pain upon the victim while the victim remains alive and conscious.", "level": 0}, {"text": "Special Notes:", "level": 0}, {"text": "• “Adversely affects the child's health and welfare” may include, but is not limited to:", "level": 0}, {"text": "○ Adverse effects on the emotional and mental health and welfare of the child", "level": 1}, {"text": "○ The natural effects of starvation or dehydration", "level": 1}, {"text": "○ Acts of female genital mutilation", "level": 1}, {"text": "• To constitute neglect, the State must prove beyond a reasonable doubt that there was an actual adverse effect to the child's health and welfare. A mere risk of harm is insufficient.", "level": 0}, {"text": "• Neglect is a continuing course of conduct beginning with the first act or omission that causes an adverse effect to the child's health and welfare and may be established by an act of commission or omission.", "level": 0}]}, {"id": 9, "name": "Aggravated Child Endangerment", "tca": "39-15-402(a)", "category": "Physical", "classLines": [{"text": "• B Felony", "level": 0}, {"text": "• A Felony (victim 8 years of age or younger)", "level": 0}, {"text": "• A Felony (victim is mentally defective, mentally incapacitated, or suffers from a physical disability)", "level": 0}], "probation": [{"text": "• Probation Eligible - No", "level": 0}], "release": [{"text": "• Release Eligibility - 100% (attempt included)", "level": 0}], "sor": [{"text": "• Sex Offender Registry: No", "level": 0}], "csl": [{"text": "• Community Supervision for Life: No", "level": 0}], "elements": [{"text": "• Commits child endangerment", "level": 0}, {"text": "• One of the following:", "level": 0}, {"text": "○ The act of endangerment results in serious bodily injury to the child", "level": 1}, {"text": "○ A deadly weapon, dangerous instrumentality, controlled substance, or controlled substance analogue is used to accomplish the act of endangerment", "level": 1}, {"text": "○ The act of endangerment was especially heinous, atrocious, or cruel", "level": 1}, {"text": "○ The act of endangerment involved strangulation", "level": 1}, {"text": "○ The act of endangerment involved the infliction of torture to the victim", "level": 1}, {"text": "○ The act of endangerment results from the knowing exposure of a child to the initiation of a process intended to result in the manufacture of methamphetamine", "level": 1}], "notes": [{"text": "Special Definitions:", "level": 0}, {"text": "• \"Dangerous instrumentality\" means any item that, in the manner of its use or intended use as applied to a child, is capable of producing serious bodily injury to a child.", "level": 0}, {"text": "• \"Deadly weapon\" means:", "level": 0}, {"text": "○ A firearm or anything manifestly designed, made, or adapted for the purpose of inflicting death or serious bodily injury; or", "level": 1}, {"text": "○ Anything that, in the manner of its use or intended use, is capable of causing death or serious bodily injury.", "level": 1}, {"text": "• \"Heinous\" means grossly wicked or reprehensible; abominable; odious; vile.", "level": 0}, {"text": "• \"Atrocious\" means extremely evil or cruel; monstrous; exceptionally bad; abominable.", "level": 0}, {"text": "• \"Cruel\" means disposed to inflict pain or suffering; causing suffering; painful.", "level": 0}, {"text": "• \"Injury\" includes:", "level": 0}, {"text": "○ A cut", "level": 1}, {"text": "○ Abrasion", "level": 1}, {"text": "○ Bruise", "level": 1}, {"text": "○ Burn", "level": 1}, {"text": "○ Disfigurement", "level": 1}, {"text": "○ Physical pain", "level": 1}, {"text": "○ Temporary illness", "level": 1}, {"text": "○ Temporary impairment of the function of a bodily member, organ, or mental faculty", "level": 1}, {"text": "• \"Serious bodily injury to the child\" means bodily injury involving:", "level": 0}, {"text": "○ A substantial risk of death", "level": 1}, {"text": "○ Protracted unconsciousness", "level": 1}, {"text": "○ Extreme physical pain", "level": 1}, {"text": "○ Protracted or obvious disfigurement", "level": 1}, {"text": "○ Protracted loss or substantial impairment of a function of a bodily member, organ, or mental faculty", "level": 1}, {"text": "○ A broken bone of a child who is twelve (12) years of age or less", "level": 1}, {"text": "• Includes, but is not limited to:", "level": 0}, {"text": "○ Second or third degree burns", "level": 1}, {"text": "○ A fracture of any bone", "level": 1}, {"text": "○ A concussion", "level": 1}, {"text": "○ Subdural bleeding", "level": 1}, {"text": "○ Subarachnoid bleeding", "level": 1}, {"text": "○ Retinal hemorrhage", "level": 1}, {"text": "○ Cerebral edema", "level": 1}, {"text": "○ Brain contusion", "level": 1}, {"text": "○ Injuries to the skin involving severe bruising or the likelihood of permanent or protracted disfigurement, including injuries sustained by whipping a child with objects", "level": 1}, {"text": "• \"Torture\" means the infliction of severe physical or mental pain upon the victim while the victim remains alive and conscious.", "level": 0}, {"text": "Special Notes:", "level": 0}, {"text": "• “Imminent danger” means the existence of any condition or practice that could reasonably be expected to cause death or serious bodily injury.", "level": 0}, {"text": "• “Knowingly” means the person knew, or should have known upon a reasonable inquiry, that abuse to or neglect of the child would occur which would result in physical injury to the child. The risk must be of such a nature and degree that the failure to perceive it constitutes a gross deviation from the standard of care that an ordinary parent or legal custodian of a child eight (8) years of age or less would exercise under all the circumstances as viewed from the defendant's standpoint.", "level": 0}, {"text": "• “Parent or custodian” means the biological or adoptive parent or any person who has legal custody of the child.", "level": 0}]}, {"id": 10, "name": "Aggravated Assault - Parent/Custodian Failure to Protect", "tca": "39-13-102(b)", "category": "Physical", "classLines": [{"text": "• C Felony", "level": 0}], "probation": [{"text": "• Probation Eligible - Yes", "level": 0}], "release": [{"text": "• Release Eligibility - Standard (100% reduecable by 15% if SBI) (attempt not included)", "level": 0}], "sor": [{"text": "• Sex Offender Registry: No", "level": 0}], "csl": [{"text": "• Community Supervision for Life: No", "level": 0}], "elements": [{"text": "• Parent or custodian of a child, or custodian of an adult", "level": 0}, {"text": "• Intentionally or knowingly", "level": 0}, {"text": "• Fails or refuses to protect the child or adult", "level": 0}, {"text": "• Either:", "level": 0}, {"text": "○ From an aggravated assault", "level": 1}, {"text": "○ From aggravated child abuse", "level": 1}], "notes": []}, {"id": 11, "name": "Reckless Endangerment", "tca": "39-13-103(a) & (b)(1)", "category": "Physical", "classLines": [{"text": "• A Misdemeanor", "level": 0}], "probation": [{"text": "• Probation Eligible - Yes", "level": 0}], "release": [{"text": "• Release Eligibility - Standard", "level": 0}], "sor": [{"text": "• Sex Offender Registry: No", "level": 0}], "csl": [{"text": "• Community Supervision for Life: No", "level": 0}], "elements": [{"text": "• Recklessly", "level": 0}, {"text": "• Engages in conduct", "level": 0}, {"text": "• Places or may place another person in imminent danger of death or serious bodily injury", "level": 0}], "notes": []}, {"id": 12, "name": "Reckless Endangerment with a Deadly Weapon", "tca": "39-13-103(b)(2)", "category": "Physical", "classLines": [{"text": "• E Felony", "level": 0}], "probation": [{"text": "• Probation Eligible - Yes", "level": 0}], "release": [{"text": "• Release Eligibility - Standard", "level": 0}], "sor": [{"text": "• Sex Offender Registry: No", "level": 0}], "csl": [{"text": "• Community Supervision for Life: No", "level": 0}], "elements": [{"text": "• Recklessly", "level": 0}, {"text": "• Engages in conduct", "level": 0}, {"text": "• Places or may place another person in imminent danger of death or serious bodily injury", "level": 0}, {"text": "• Uses a deadly weapon", "level": 0}], "notes": []}, {"id": 13, "name": "Reckless Endangerment - Discharge into Occupied Habitation", "tca": "39-13-103(b)(3)", "category": "Physical", "classLines": [{"text": "• C Felony", "level": 0}], "probation": [{"text": "• Probation Eligible - Yes", "level": 0}], "release": [{"text": "• Release Eligibility - Standard", "level": 0}], "sor": [{"text": "• Sex Offender Registry: No", "level": 0}], "csl": [{"text": "• Community Supervision for Life: No", "level": 0}], "elements": [{"text": "• Recklessly", "level": 0}, {"text": "• Discharges a firearm or antique firearm", "level": 0}, {"text": "• Into a habitation", "level": 0}, {"text": "• Habitation occupied at the time of the offense", "level": 0}], "notes": []}, {"id": 14, "name": "Reckless Endangerment - Discharge into Unoccupied Habitation", "tca": "39-13-103(b)(3)", "category": "Physical", "classLines": [{"text": "• D Felony", "level": 0}], "probation": [{"text": "• Probation Eligible - Yes", "level": 0}], "release": [{"text": "• Release Eligibility - Standard", "level": 0}], "sor": [{"text": "• Sex Offender Registry: No", "level": 0}], "csl": [{"text": "• Community Supervision for Life: No", "level": 0}], "elements": [{"text": "• Recklessly", "level": 0}, {"text": "• Discharges a firearm or antique firearm", "level": 0}, {"text": "• Into a habitation", "level": 0}, {"text": "• Habitation unoccupied at the time of the offense", "level": 0}], "notes": []}, {"id": 15, "name": "Reckless Endangerment - Discharge from Motor Vehicle", "tca": "39-13-103(b)(4)", "category": "Physical", "classLines": [{"text": "• C Felony", "level": 0}], "probation": [{"text": "• Probation Eligible - Yes", "level": 0}], "release": [{"text": "• Release Eligibility - Standard", "level": 0}], "sor": [{"text": "• Sex Offender Registry: No", "level": 0}], "csl": [{"text": "• Community Supervision for Life: No", "level": 0}], "elements": [{"text": "• Recklessly", "level": 0}, {"text": "• Discharges a firearm", "level": 0}, {"text": "• From within a motor vehicle", "level": 0}], "notes": []}, {"id": 16, "name": "Contributing to or Encouraging Delinquency or Unruly Behavior of a Child", "tca": "37-1-156(a)(1)", "category": "Physical", "classLines": [{"text": "• A Misdemeanor", "level": 0}], "probation": [{"text": "• Probation Eligible - Yes", "level": 0}], "release": [{"text": "• Release Eligibility - Standard", "level": 0}], "sor": [{"text": "• Sex Offender Registry: No", "level": 0}], "csl": [{"text": "• Community Supervision for Life: No", "level": 0}], "elements": [{"text": "• Adult", "level": 0}, {"text": "• Either:", "level": 0}, {"text": "○ Contributes to the delinquency or unruly behavior of a child", "level": 1}, {"text": "○ Encourages the delinquency or unruly behavior of a child", "level": 1}, {"text": "• Either:", "level": 0}, {"text": "○ Aids or abets the child in the commission of an act of delinquency or unruly conduct", "level": 1}, {"text": "○ Encourages the child in the commission of an act of delinquency or unruly conduct", "level": 1}, {"text": "○ Participates as a principal with the child in an act of delinquency or unruly conduct", "level": 1}, {"text": "○ Aids the child in concealing an act of delinquency or unruly conduct following its commission", "level": 1}], "notes": [{"text": "Special Definitions:", "level": 0}, {"text": "• \"Delinquent act\" means an act designated a crime under the law, including local ordinances, the law of another state, or federal law, excluding status offenses and certain traffic offenses.", "level": 0}, {"text": "• \"Unruly child\" means a child in need of treatment and rehabilitation who:", "level": 0}, {"text": "○ Habitually and without justification is truant from school", "level": 1}, {"text": "○ Habitually is disobedient of the reasonable and lawful commands of the child's parent, guardian, or legal custodian to the degree the child's health and safety are endangered", "level": 1}, {"text": "○ Commits an offense applicable only to a child", "level": 1}, {"text": "○ Is away from the home, residence, or residential placement of a parent, guardian, or legal custodian without consent (runaway)", "level": 1}, {"text": "Special Notes:", "level": 0}, {"text": "• A defendant shall serve 100% of the maximum authorized sentence for a Class A misdemeanor if:", "level": 0}, {"text": "○ The violation involves supplying, giving, furnishing, selling, or permitting a child to buy or obtain a product or substance that is unlawful for the child to possess; and", "level": 1}, {"text": "○ As a proximate result of the product or substance, the child engages in conduct that causes the death of another.", "level": 1}]}, {"id": 17, "name": "False Imprisonment", "tca": "39-13-302", "category": "Physical", "classLines": [{"text": "• A Misdemeanor", "level": 0}], "probation": [{"text": "• Probation Eligible - Yes", "level": 0}], "release": [{"text": "• Release Eligibility - Standard", "level": 0}], "sor": [{"text": "• Sex Offender Registry: Yes (Sexual Offender) if victim is a minor, except when committed by a parent", "level": 0}], "csl": [{"text": "• Community Supervision for Life: No", "level": 0}], "elements": [{"text": "• Knowingly", "level": 0}, {"text": "• Removes or confines another unlawfully", "level": 0}], "notes": [{"text": "Special Definitions:", "level": 0}, {"text": "• \"Unlawfully\" means removal or confinement accomplished:", "level": 0}, {"text": "○ By force, threat, or fraud; or", "level": 1}, {"text": "○ In the case of a person under thirteen (13) years of age or an incompetent person, without the consent of a parent, guardian, or other person responsible for the general supervision of the person's welfare.", "level": 1}, {"text": "Special Notes:", "level": 0}, {"text": "• A victim's parent generally may not be prosecuted when the charged theory relies upon the lack-of-parental-consent portion of the definition of \"unlawfully.\"", "level": 0}, {"text": "• A victim's parent may still be prosecuted if the removal or confinement is accomplished by force, threat, or fraud.", "level": 0}, {"text": "• If the parent is subject to a court order restricting or limiting custodial rights, further analysis may be required.", "level": 0}]}, {"id": 18, "name": "Kidnapping", "tca": "39-13-303", "category": "Physical", "classLines": [{"text": "• C Felony", "level": 0}], "probation": [{"text": "• Probation Eligible - Yes", "level": 0}], "release": [{"text": "• Release Eligibility - Standard", "level": 0}], "sor": [{"text": "• Sex Offender Registry: Yes (Sexual Offender) if victim is a minor, except when committed by a parent", "level": 0}], "csl": [{"text": "• Community Supervision for Life: No", "level": 0}], "elements": [{"text": "• Commits false imprisonment", "level": 0}, {"text": "• Under circumstances exposing the other person to substantial risk of bodily injury", "level": 0}], "notes": [{"text": "Special Definitions:", "level": 0}, {"text": "• \"Unlawfully\" means removal or confinement accomplished:", "level": 0}, {"text": "○ By force, threat, or fraud; or", "level": 1}, {"text": "○ In the case of a person under thirteen (13) years of age or an incompetent person, without the consent of a parent, guardian, or other person responsible for the general supervision of the person's welfare.", "level": 1}, {"text": "Special Notes:", "level": 0}, {"text": "• A victim's parent generally may not be prosecuted when the charged theory relies upon the lack-of-parental-consent portion of the definition of \"unlawfully.\"", "level": 0}, {"text": "• A victim's parent may still be prosecuted if the removal or confinement is accomplished by force, threat, or fraud.", "level": 0}, {"text": "• If the parent is subject to a court order restricting or limiting custodial rights, further analysis may be required.", "level": 0}]}, {"id": 19, "name": "Aggravated Kidnapping", "tca": "39-13-304", "category": "Physical", "classLines": [{"text": "• B Felony", "level": 0}], "probation": [{"text": "• Probation Eligible - No", "level": 0}], "release": [{"text": "• Release Eligibility - 100% (may be reduced by 15%) (attempt not included)", "level": 0}], "sor": [{"text": "• Sex Offender Registry: Yes (Violent Sexual Offender) if victim is a minor, except when committed by a parent", "level": 0}], "csl": [{"text": "• Community Supervision for Life: No", "level": 0}], "elements": [{"text": "• Commits false imprisonment", "level": 0}, {"text": "• One of the following:", "level": 0}, {"text": "○ To facilitate the commission of a felony or flight thereafter", "level": 1}, {"text": "○ To interfere with the performance of a governmental or political function", "level": 1}, {"text": "○ With intent to inflict serious bodily injury on or terrorize the victim or another", "level": 1}, {"text": "○ The victim suffers bodily injury", "level": 1}, {"text": "○ Defendant possesses a deadly weapon or threatens the use of a deadly weapon", "level": 1}], "notes": [{"text": "Special Definitions:", "level": 0}, {"text": "• \"Unlawfully\" means removal or confinement accomplished:", "level": 0}, {"text": "○ By force, threat, or fraud; or", "level": 1}, {"text": "○ In the case of a person under thirteen (13) years of age or an incompetent person, without the consent of a parent, guardian, or other person responsible for the general supervision of the person's welfare.", "level": 1}, {"text": "Special Notes:", "level": 0}, {"text": "• A victim's parent generally may not be prosecuted when the charged theory relies upon the lack-of-parental-consent portion of the definition of \"unlawfully.\"", "level": 0}, {"text": "• A victim's parent may still be prosecuted if the removal or confinement is accomplished by force, threat, or fraud.", "level": 0}, {"text": "• If the parent is subject to a court order restricting or limiting custodial rights, further analysis may be required.", "level": 0}]}, {"id": 20, "name": "Especially Aggravated Kidnapping", "tca": "39-13-305", "category": "Physical", "classLines": [{"text": "• A Felony", "level": 0}, {"text": "• Mandatory Range II sentencing minimum", "level": 0}, {"text": "• Range II offender (may be sentenced within Range III if appropriate)", "level": 0}], "probation": [{"text": "• Probation Eligible - No", "level": 0}], "release": [{"text": "• Release Eligibility - 100% (attempt not included)", "level": 0}], "sor": [{"text": "• Sex Offender Registry: Yes (Violent Sexual Offender) if victim is a minor, except when committed by a parent", "level": 0}], "csl": [{"text": "• Community Supervision for Life: No", "level": 0}], "elements": [{"text": "• Commits false imprisonment", "level": 0}, {"text": "• One of the following:", "level": 0}, {"text": "○ Accomplished with a deadly weapon or by display of an article used or fashioned to lead the victim to reasonably believe it to be a deadly weapon", "level": 1}, {"text": "○ Victim was under 13 years of age at the time of the removal or confinement", "level": 1}, {"text": "○ Committed to hold the victim for ransom or reward, or as a shield or hostage", "level": 1}, {"text": "○ Victim suffers serious bodily injury", "level": 1}], "notes": [{"text": "Special Definitions:", "level": 0}, {"text": "• \"Unlawfully\" means removal or confinement accomplished:", "level": 0}, {"text": "○ By force, threat, or fraud; or", "level": 1}, {"text": "○ In the case of a person under thirteen (13) years of age or an incompetent person, without the consent of a parent, guardian, or other person responsible for the general supervision of the person's welfare.", "level": 1}, {"text": "Special Notes:", "level": 0}, {"text": "• A victim's parent generally may not be prosecuted when the charged theory relies upon the lack-of-parental-consent portion of the definition of \"unlawfully.\"", "level": 0}, {"text": "• A victim's parent may still be prosecuted if the removal or confinement is accomplished by force, threat, or fraud.", "level": 0}, {"text": "• If the parent is subject to a court order restricting or limiting custodial rights, further analysis may be required.", "level": 0}]}, {"id": 21, "name": "Custodial Interference", "tca": "39-13-306(a)", "category": "Physical", "classLines": [{"text": "• E Felony", "level": 0}, {"text": "• A Misdemeanor if person is voluntarily returned by defendant", "level": 0}, {"text": "• C Misdemeanor if charged under § 39-13-306(a)(5)", "level": 0}], "probation": [{"text": "• Probation Eligible - Yes", "level": 0}], "release": [{"text": "• Release Eligibility - Standard", "level": 0}], "sor": [{"text": "• Sex Offender Registry: No", "level": 0}], "csl": [{"text": "• Community Supervision for Life: No", "level": 0}], "elements": [{"text": "• Natural or adoptive parent, step-parent, grandparent, brother, sister, aunt, uncle, niece, or nephew", "level": 0}, {"text": "• Victim younger than 18 years of age", "level": 0}, {"text": "• One of the following:", "level": 0}, {"text": "○ Removes the child from this state knowing the removal violates a custody determination, rightful custody of a mother, or court order regarding custody or care", "level": 1}, {"text": "○ Detains the child within this state or removes the child from this state after expiration of lawful visitation with intent to violate rightful custody of a mother or a custody order", "level": 1}, {"text": "○ Harbors or hides the child knowing possession was unlawfully obtained in violation of rightful custody of a mother or a custody order", "level": 1}, {"text": "○ Acts as an accessory to conduct prohibited by this section", "level": 1}, {"text": "○ Detains or removes the child during the noncustodial parent's lawful visitation period with intent to violate court-ordered visitation", "level": 1}, {"text": "○ Harbors or hides the child knowing the child has been placed in DCS custody pursuant to a protective custody order or emergency custody order", "level": 1}], "notes": [{"text": "Special Notes:", "level": 0}, {"text": "• It is a defense that the defendant reasonably believed that failure to remove the child or incompetent person would have resulted in a clear and present danger to the health, safety, or welfare of the child or incompetent person.", "level": 0}, {"text": "• It is a defense that the child or incompetent person was returned voluntarily before arrest or before the issuance of a warrant.", "level": 0}, {"text": "• If conduct violating this section also violates § 39-13-304 or § 39-13-305(a)(1), (a)(3), or (a)(4), the offense may be prosecuted under any applicable statute.", "level": 0}]}, {"id": 22, "name": "Rape", "tca": "39-13-503", "category": "Sexual", "classLines": [{"text": "• B Felony", "level": 0}, {"text": "• Mandatory Range II sentencing minimum", "level": 0}, {"text": "• Range II offender (may be sentenced within Range III if appropriate)", "level": 0}], "probation": [{"text": "• Probation Eligible - No", "level": 0}], "release": [{"text": "• Release Eligibility - 100% (attempt included)", "level": 0}], "sor": [{"text": "• Sex Offender Registry: Yes (Violent Sexual Offender)", "level": 0}], "csl": [{"text": "• Community Supervision for Life: Yes", "level": 0}], "elements": [{"text": "• Unlawful sexual penetration of the victim by the defendant or of the defendant by the victim", "level": 0}, {"text": "• One of the following:", "level": 0}, {"text": "○ Force or coercion is used to accomplish the act", "level": 1}, {"text": "○ Sexual penetration is accomplished without the consent of the victim and the defendant knows or has reason to know the victim did not consent", "level": 1}, {"text": "○ The defendant knows or has reason to know the victim is:", "level": 1}, {"text": "▪ Mentally defective", "level": 2}, {"text": "▪ Mentally incapacitated", "level": 2}, {"text": "▪ Physically helpless", "level": 2}, {"text": "▪ A vulnerable adult with an intellectual disability", "level": 2}, {"text": "○ Sexual penetration is accomplished by fraud", "level": 1}], "notes": [{"text": "Special Definitions:", "level": 0}, {"text": "• \"Sexual penetration\" means sexual intercourse, cunnilingus, fellatio, anal intercourse, or any other intrusion, however slight, of any part of a person's body or of any object into the genital or anal openings of the alleged victim's, the defendant's, or any other person's body, but emission of semen is not required.", "level": 0}, {"text": "• \"Force\" means compulsion by the use of physical power or violence.", "level": 0}, {"text": "• \"Coercion\" means threat of kidnapping, extortion, force or violence to be performed immediately or in the future or the use of parental, custodial or official authority over a child less than fifteen (15) years of age.", "level": 0}]}, {"id": 23, "name": "Aggravated Rape", "tca": "39-13-502", "category": "Sexual", "classLines": [{"text": "• A Felony", "level": 0}, {"text": "• Mandatory Range II sentencing minimum", "level": 0}, {"text": "• Range II offender (may be sentenced within Range III if appropriate)", "level": 0}], "probation": [{"text": "• Probation Eligible - No", "level": 0}], "release": [{"text": "• Release Eligibility - 100% (attempt not included)", "level": 0}], "sor": [{"text": "• Sex Offender Registry: Yes (Violent Sexual Offender)", "level": 0}], "csl": [{"text": "• Community Supervision for Life: Yes", "level": 0}], "elements": [{"text": "• Unlawful sexual penetration of the victim by the defendant or of the defendant by the victim", "level": 0}, {"text": "• One of the following:", "level": 0}, {"text": "○ Force or coercion is used to accomplish the act and the defendant is armed with a weapon or an article used or fashioned to reasonably appear to be a weapon", "level": 1}, {"text": "○ The defendant causes bodily injury to the victim", "level": 1}, {"text": "○ The defendant is aided or abetted by one or more other persons and:", "level": 1}, {"text": "▪ Force or coercion is used to accomplish the act", "level": 2}, {"text": "▪ The defendant knows or has reason to know the victim is:", "level": 2}, {"text": "▪ Mentally defective", "level": 2}, {"text": "▪ Mentally incapacitated", "level": 2}, {"text": "▪ Physically helpless", "level": 2}, {"text": "▪ A vulnerable adult with an intellectual disability", "level": 2}, {"text": "○ The defendant knows that the defendant is infected with HIV", "level": 1}], "notes": [{"text": "Special Definitions:", "level": 0}, {"text": "• \"Sexual penetration\" means sexual intercourse, cunnilingus, fellatio, anal intercourse, or any other intrusion, however slight, of any part of a person's body or of any object into the genital or anal openings of the alleged victim's, the defendant's, or any other person's body, but emission of semen is not required.", "level": 0}, {"text": "• \"Force\" means compulsion by the use of physical power or violence.", "level": 0}, {"text": "• \"Coercion\" means threat of kidnapping, extortion, force or violence to be performed immediately or in the future or the use of parental, custodial or official authority over a child less than fifteen (15) years of age.", "level": 0}]}, {"id": 24, "name": "Especially Aggravated Rape", "tca": "39-13-534", "category": "Sexual", "classLines": [{"text": "• A Felony", "level": 0}, {"text": "• Adult defendant: Life without parole", "level": 0}, {"text": "• Juvenile defendant: Mandatory Range III sentencing", "level": 0}], "probation": [{"text": "• Probation Eligible - No", "level": 0}], "release": [{"text": "• Release Eligibility - LWOP (attempt not 100% offense)", "level": 0}], "sor": [{"text": "• Sex Offender Registry: Yes (Violent Sexual Offender)", "level": 0}], "csl": [{"text": "• Community Supervision for Life: No", "level": 0}], "elements": [{"text": "• Commits aggravated rape", "level": 0}, {"text": "• Two or more of the following:", "level": 0}, {"text": "○ Defendant tortures the victim during the offense", "level": 1}, {"text": "○ Defendant mutilates the victim during the offense", "level": 1}, {"text": "○ Defendant commits kidnapping or false imprisonment against the victim", "level": 1}, {"text": "○ Defendant commits involuntary labor servitude or trafficking for a commercial sex act against the victim", "level": 1}, {"text": "○ Defendant has more than one prior conviction for a sexual offense or violent sexual offense", "level": 1}, {"text": "○ The offense occurs during an attempt to perpetrate first degree murder", "level": 1}, {"text": "○ Defendant subjects the victim to extreme cruelty during the offense", "level": 1}, {"text": "○ The offense involves more than one victim", "level": 1}, {"text": "○ Defendant knows or has reason to know the victim is:", "level": 1}, {"text": "▪ Mentally defective", "level": 2}, {"text": "▪ Mentally incapacitated", "level": 2}, {"text": "▪ Physically helpless", "level": 2}], "notes": [{"text": "Special Definitions:", "level": 0}, {"text": "• \"Sexual penetration\" means sexual intercourse, cunnilingus, fellatio, anal intercourse, or any other intrusion, however slight, of any part of a person's body or of any object into the genital or anal openings of the alleged victim's, the defendant's, or any other person's body, but emission of semen is not required.", "level": 0}, {"text": "• \"Force\" means compulsion by the use of physical power or violence.", "level": 0}, {"text": "• \"Coercion\" means threat of kidnapping, extortion, force or violence to be performed immediately or in the future or the use of parental, custodial or official authority over a child less than fifteen (15) years of age.", "level": 0}, {"text": "Special Notes:", "level": 0}, {"text": "• A person may not be convicted of both Especially Aggravated Rape and Aggravated Rape, Aggravated Rape of a Child, or Aggravated Prostitution if the prosecution arises from the same criminal conduct.", "level": 0}]}, {"id": 25, "name": "Rape of a Child", "tca": "39-13-522", "category": "Sexual", "classLines": [{"text": "• A Felony", "level": 0}, {"text": "• Adult defendant: Death, Life Without Parole, or Life", "level": 0}, {"text": "• Juvenile defendant: Mandatory Range II sentencing minimum", "level": 0}, {"text": "• Range II offender (may be sentenced within Range III if appropriate)", "level": 0}], "probation": [{"text": "• Probation Eligible - No", "level": 0}], "release": [{"text": "• Release Eligibility - Life (attempt is not a 100% offense) (100% for facilitation)", "level": 0}], "sor": [{"text": "• Sex Offender Registry: Yes (Violent Sexual Offender)", "level": 0}], "csl": [{"text": "• Community Supervision for Life: Yes", "level": 0}], "elements": [{"text": "• Unlawful sexual penetration of the victim by the defendant or of the defendant by the victim", "level": 0}, {"text": "• Victim is more than eight (8) years of age but less than thirteen (13) years of age", "level": 0}], "notes": [{"text": "Special Definitions:", "level": 0}, {"text": "• \"Sexual penetration\" means sexual intercourse, cunnilingus, fellatio, anal intercourse, or any other intrusion, however slight, of any part of a person's body or of any object into the genital or anal openings of the alleged victim's, the defendant's, or any other person's body, but emission of semen is not required.", "level": 0}]}, {"id": 26, "name": "Aggravated Rape of a Child", "tca": "39-13-531", "category": "Sexual", "classLines": [{"text": "• A Felony", "level": 0}, {"text": "• Adult defendant: Death or Life Without Parole", "level": 0}, {"text": "• Juvenile defendant: Mandatory Range III sentencing", "level": 0}, {"text": "• Range III offender", "level": 0}], "probation": [{"text": "• Probation Eligible - No", "level": 0}], "release": [{"text": "• Release Eligibility - LWOP (attempt is not a 100% offense) (100% for facilitation)", "level": 0}], "sor": [{"text": "• Sex Offender Registry: Yes (Violent Sexual Offender)", "level": 0}], "csl": [{"text": "• Community Supervision for Life: Yes", "level": 0}], "elements": [{"text": "• Unlawful sexual penetration of the victim by the defendant or of the defendant by the victim", "level": 0}, {"text": "• Victim is eight (8) years of age or less", "level": 0}], "notes": [{"text": "Special Definitions:", "level": 0}, {"text": "• \"Sexual penetration\" means sexual intercourse, cunnilingus, fellatio, anal intercourse, or any other intrusion, however slight, of any part of a person's body or of any object into the genital or anal openings of the alleged victim's, the defendant's, or any other person's body, but emission of semen is not required.", "level": 0}]}, {"id": 27, "name": "Especially Aggravated Rape of a Child", "tca": "39-13-535", "category": "Sexual", "classLines": [{"text": "• A Felony", "level": 0}, {"text": "• Adult defendant: Life Without Parole", "level": 0}, {"text": "• Juvenile defendant: Mandatory Range III sentencing", "level": 0}, {"text": "• Range III offender", "level": 0}], "probation": [{"text": "• Probation Eligible - No", "level": 0}], "release": [{"text": "• Release Eligibility - LWOP (attempt is not a 100% offense)", "level": 0}], "sor": [{"text": "• Sex Offender Registry: Yes (Violent Sexual Offender)", "level": 0}], "csl": [{"text": "• Community Supervision for Life: No", "level": 0}], "elements": [{"text": "• Unlawful sexual penetration of the victim by the defendant or of the defendant by the victim", "level": 0}, {"text": "• Victim is more than twelve (12) years of age but less than eighteen (18) years of age", "level": 0}, {"text": "• Three or more of the following:", "level": 0}, {"text": "○ Defendant tortures the victim during the offense", "level": 1}, {"text": "○ Defendant mutilates the victim during the offense", "level": 1}, {"text": "○ Defendant commits kidnapping or false imprisonment against the victim", "level": 1}, {"text": "○ Defendant commits involuntary labor servitude or trafficking for a commercial sex act against the victim", "level": 1}, {"text": "○ Defendant has more than one prior conviction for a sexual offense or violent sexual offense", "level": 1}, {"text": "○ Defendant is in a position of trust or has supervisory or disciplinary power over the victim and uses that position to accomplish the sexual penetration", "level": 1}, {"text": "○ Defendant has parental or custodial authority over the victim and uses that position to accomplish the sexual penetration", "level": 1}, {"text": "○ The offense occurs during an attempt to perpetrate first degree murder", "level": 1}, {"text": "○ Defendant subjects the victim to extreme cruelty during the offense", "level": 1}, {"text": "○ Force or coercion is used and the defendant is armed with a weapon or an article fashioned to appear to be a weapon", "level": 1}, {"text": "○ Defendant causes serious bodily injury to the victim", "level": 1}, {"text": "○ The offense involves more than one victim", "level": 1}, {"text": "○ Defendant knows or has reason to know the victim is:", "level": 1}, {"text": "▪ Mentally defective", "level": 2}, {"text": "▪ Mentally incapacitated", "level": 2}, {"text": "▪ Physically helpless", "level": 2}], "notes": [{"text": "Special Definitions:", "level": 0}, {"text": "• \"Sexual penetration\" means sexual intercourse, cunnilingus, fellatio, anal intercourse, or any other intrusion, however slight, of any part of a person's body or of any object into the genital or anal openings of the alleged victim's, the defendant's, or any other person's body, but emission of semen is not required.", "level": 0}, {"text": "• \"Force\" means compulsion by the use of physical power or violence.", "level": 0}, {"text": "• \"Coercion\" means threat of kidnapping, extortion, force or violence to be performed immediately or in the future or the use of parental, custodial or official authority over a child less than fifteen (15) years of age.", "level": 0}, {"text": "Special Notes:", "level": 0}, {"text": "• A person may not be convicted of both Especially Aggravated Rape of a Child and Aggravated Rape, Aggravated Rape of a Child, Especially Aggravated Rape, or Aggravated Prostitution if the prosecution arises from the same criminal conduct.", "level": 0}]}, {"id": 28, "name": "Mitigated Statutory Rape", "tca": "39-13-506(a)", "category": "Sexual", "classLines": [{"text": "• E Felony", "level": 0}], "probation": [{"text": "• Probation Eligible - Yes", "level": 0}], "release": [{"text": "• Release Eligibility - Standard", "level": 0}], "sor": [{"text": "• Sex Offender Registry: No", "level": 0}], "csl": [{"text": "• Community Supervision for Life: No", "level": 0}], "elements": [{"text": "• Unlawful sexual penetration of the victim by the defendant, or of the defendant by the victim", "level": 0}, {"text": "• Victim is at least fifteen (15) years of age but less than eighteen (18) years of age", "level": 0}, {"text": "• Defendant is at least four (4) but not more than five (5) years older than the victim", "level": 0}], "notes": [{"text": "Special Definitions:", "level": 0}, {"text": "• \"Sexual penetration\" means sexual intercourse, cunnilingus, fellatio, anal intercourse, or any other intrusion, however slight, of any part of a person's body or of any object into the genital or anal openings of the alleged victim's, the defendant's, or any other person's body, but emission of semen is not required.", "level": 0}]}, {"id": 29, "name": "Statutory Rape", "tca": "39-13-506(b)", "category": "Sexual", "classLines": [{"text": "• E Felony", "level": 0}], "probation": [{"text": "• Probation Eligible - Yes", "level": 0}], "release": [{"text": "• Release Eligibility - Standard", "level": 0}], "sor": [{"text": "• Sex Offender Registry: Discretionary", "level": 0}], "csl": [{"text": "• Community Supervision for Life: No", "level": 0}], "elements": [{"text": "• Unlawful sexual penetration of the victim by the defendant or of the defendant by the victim", "level": 0}, {"text": "• Either:", "level": 0}, {"text": "○ Victim is at least thirteen (13) years of age but less than fifteen (15) years of age and defendant is at least four (4) years but less than ten (10) years older than the victim", "level": 1}, {"text": "○ Victim is at least fifteen (15) years of age but less than eighteen (18) years of age and defendant is more than five (5) years but less than ten (10) years older than the victim", "level": 1}], "notes": [{"text": "Special Definitions:", "level": 0}, {"text": "• \"Sexual penetration\" means sexual intercourse, cunnilingus, fellatio, anal intercourse, or any other intrusion, however slight, of any part of a person's body or of any object into the genital or anal openings of the alleged victim's, the defendant's, or any other person's body, but emission of semen is not required.", "level": 0}, {"text": "Special Notes:", "level": 0}, {"text": "• For a first conviction, the trial judge may order the defendant to register as a Sexual Offender after considering the facts and circumstances of the offense, including the offense originally charged and whether the conviction resulted from a plea bargain agreement.", "level": 0}]}, {"id": 30, "name": "Aggravated Statutory Rape", "tca": "39-13-506(c)", "category": "Sexual", "classLines": [{"text": "• D Felony", "level": 0}], "probation": [{"text": "• Probation Eligible - Yes", "level": 0}], "release": [{"text": "• Release Eligibility - 100% (attempt included)", "level": 0}], "sor": [{"text": "• Sex Offender Registry: Yes (Sexual Offender)", "level": 0}], "csl": [{"text": "• Community Supervision for Life: No", "level": 0}], "elements": [{"text": "• Unlawful sexual penetration of the victim by the defendant or of the defendant by the victim", "level": 0}, {"text": "• Victim is at least thirteen (13) years of age but less than eighteen (18) years of age", "level": 0}, {"text": "• Defendant is at least ten (10) years older than the victim", "level": 0}], "notes": [{"text": "Special Definitions:", "level": 0}, {"text": "• \"Sexual penetration\" means sexual intercourse, cunnilingus, fellatio, anal intercourse, or any other intrusion, however slight, of any part of a person's body or of any object into the genital or anal openings of the alleged victim's, the defendant's, or any other person's body, but emission of semen is not required.", "level": 0}]}, {"id": 31, "name": "Statutory Rape by an Authority Figure", "tca": "39-13-532", "category": "Sexual", "classLines": [{"text": "• B Felony", "level": 0}], "probation": [{"text": "• Probation Eligible - No", "level": 0}], "release": [{"text": "• Release Eligibility - 100% (attempt included)", "level": 0}], "sor": [{"text": "• Sex Offender Registry: Yes (Violent Sexual Offender)", "level": 0}], "csl": [{"text": "• Community Supervision for Life: No", "level": 0}], "elements": [{"text": "• Unlawful sexual penetration of the victim by the defendant or of the defendant by the victim", "level": 0}, {"text": "• Victim is at least thirteen (13) years of age but less than eighteen (18) years of age", "level": 0}, {"text": "• Defendant is at least four (4) years older than the victim", "level": 0}, {"text": "• Either:", "level": 0}, {"text": "○ Defendant was in a position of trust or had supervisory or disciplinary power over the victim by virtue of the defendant's legal, professional, or occupational status and used that position or power to accomplish the sexual penetration", "level": 1}, {"text": "○ Defendant had parental or custodial authority over the victim by virtue of the defendant's legal, professional, or occupational status and used that position to accomplish the sexual penetration", "level": 1}], "notes": [{"text": "Special Definitions:", "level": 0}, {"text": "• \"Sexual penetration\" means sexual intercourse, cunnilingus, fellatio, anal intercourse, or any other intrusion, however slight, of any part of a person's body or of any object into the genital or anal openings of the alleged victim's, the defendant's, or any other person's body, but emission of semen is not required.", "level": 0}]}, {"id": 32, "name": "Sexual Battery", "tca": "39-13-505", "category": "Sexual", "classLines": [{"text": "• E Felony", "level": 0}], "probation": [{"text": "• Probation Eligible - Yes", "level": 0}], "release": [{"text": "• Release Eligibility - 100% (attempt included)", "level": 0}], "sor": [{"text": "• Sex Offender Registry: Yes (Sexual Offender)", "level": 0}], "csl": [{"text": "• Community Supervision for Life: No", "level": 0}], "elements": [{"text": "• Unlawful sexual contact with the victim by the defendant or the defendant by the victim", "level": 0}, {"text": "• One of the following:", "level": 0}, {"text": "○ Force or coercion is used to accomplish the act", "level": 1}, {"text": "○ Sexual contact is accomplished without the consent of the victim and the defendant knows or has reason to know the victim did not consent", "level": 1}, {"text": "○ Defendant knows or has reason to know the victim is:", "level": 1}, {"text": "▪ Mentally defective", "level": 2}, {"text": "▪ Mentally incapacitated", "level": 2}, {"text": "▪ Physically helpless", "level": 2}, {"text": "○ Sexual contact is accomplished by fraud", "level": 1}], "notes": [{"text": "Special Definitions:", "level": 0}, {"text": "• \"Coercion\" means the threat of kidnapping, extortion, force, or violence to be performed immediately or in the future.", "level": 0}, {"text": "• \"Sexual contact\" means the intentional touching of the alleged victim's, the defendant's, or any other person's intimate parts, or the intentional touching of the clothing covering the immediate area of the alleged victim's, the defendant's, or any other person's intimate parts, if that intentional touching can be reasonably construed as being for the purpose of sexual arousal or gratification.", "level": 0}, {"text": "• \"Intimate parts\" includes semen, vaginal fluid, the primary genital area, groin, inner thigh, buttock, or breast of a human being.", "level": 0}, {"text": "• \"Force\" means compulsion by the use of physical power or violence.", "level": 0}, {"text": "Special Notes:", "level": 0}, {"text": "• A victim is incapable of consent if:", "level": 0}, {"text": "○ Sexual contact occurs during a consultation, examination, treatment, therapy, or other professional service; and", "level": 1}, {"text": "○ The defendant is a member of the clergy, healthcare professional, or alcohol and drug abuse counselor who was treating the victim for a mental, emotional, or physical condition.", "level": 1}]}, {"id": 33, "name": "Aggravated Sexual Battery", "tca": "39-13-504", "category": "Sexual", "classLines": [{"text": "• B Felony", "level": 0}, {"text": "• If victim is under 18 years of age, mentally defective, mentally incapacitated, or physically helpless:", "level": 0}, {"text": "○ Mandatory Range II sentencing minimum", "level": 1}, {"text": "○ Range II offender (may be sentenced within Range III if appropriate)", "level": 1}], "probation": [{"text": "• Probation Eligible - No", "level": 0}], "release": [{"text": "• Release Eligibility - 100% (attempt included)", "level": 0}], "sor": [{"text": "• Sex Offender Registry: Yes (Violent Sexual Offender)", "level": 0}], "csl": [{"text": "• Community Supervision for Life: Yes", "level": 0}], "elements": [{"text": "• Unlawful sexual contact with the victim by the defendant or the defendant by the victim", "level": 0}, {"text": "• One of the following:", "level": 0}, {"text": "○ Force or coercion is used to accomplish the act and the defendant is armed with a weapon or an article used or fashioned to reasonably appear to be a weapon", "level": 1}, {"text": "○ The defendant causes bodily injury to the victim", "level": 1}, {"text": "○ The defendant is aided or abetted by one or more other persons and:", "level": 1}, {"text": "▪ Force or coercion is used to accomplish the act", "level": 2}, {"text": "▪ The defendant knows or has reason to know the victim is:", "level": 2}, {"text": "▪ Mentally defective", "level": 2}, {"text": "▪ Mentally incapacitated", "level": 2}, {"text": "▪ Physically helpless", "level": 2}, {"text": "○ The victim is less than thirteen (13) years of age", "level": 1}], "notes": [{"text": "Special Definitions:", "level": 0}, {"text": "• \"Sexual contact\" means the intentional touching of the alleged victim's, the defendant's, or any other person's intimate parts, or the intentional touching of the clothing covering the immediate area of the alleged victim's, the defendant's, or any other person's intimate parts, if that intentional touching can be reasonably construed as being for the purpose of sexual arousal or gratification.", "level": 0}, {"text": "• \"Intimate parts\" includes semen, vaginal fluid, the primary genital area, groin, inner thigh, buttock, or breast of a human being.", "level": 0}, {"text": "• \"Force\" means compulsion by the use of physical power or violence.", "level": 0}, {"text": "• \"Coercion\" means threat of kidnapping, extortion, force or violence to be performed immediately or in the future or the use of parental, custodial or official authority over a child less than fifteen (15) years of age.", "level": 0}]}, {"id": 34, "name": "Sexual Battery by an Authority Figure", "tca": "39-13-527", "category": "Sexual", "classLines": [{"text": "• C Felony", "level": 0}], "probation": [{"text": "• Probation Eligible - Yes", "level": 0}], "release": [{"text": "• Release Eligibility - 100% (attempt included)", "level": 0}], "sor": [{"text": "• Sex Offender Registry: Yes (Violent Sexual Offender)", "level": 0}], "csl": [{"text": "• Community Supervision for Life: No", "level": 0}], "elements": [{"text": "• Unlawful sexual contact with the victim by the defendant or the defendant by the victim", "level": 0}, {"text": "• Either:", "level": 0}, {"text": "○ Victim was at least thirteen (13) years of age but less than eighteen (18) years of age", "level": 1}, {"text": "○ Victim was mentally defective, mentally incapacitated, or physically helpless regardless of age", "level": 1}, {"text": "• Either:", "level": 0}, {"text": "○ Defendant was in a position of trust or had supervisory or disciplinary power over the victim by virtue of the defendant's legal, professional, or occupational status and used that position or power to accomplish the sexual contact", "level": 1}, {"text": "○ Defendant had parental or custodial authority over the victim and used that authority to accomplish the sexual contact", "level": 1}], "notes": [{"text": "Special Definitions:", "level": 0}, {"text": "• \"Sexual contact\" means the intentional touching of the alleged victim's, the defendant's, or any other person's intimate parts, or the intentional touching of the clothing covering the immediate area of the alleged victim's, the defendant's, or any other person's intimate parts, if that intentional touching can be reasonably construed as being for the purpose of sexual arousal or gratification.", "level": 0}, {"text": "• \"Intimate parts\" includes semen, vaginal fluid, the primary genital area, groin, inner thigh, buttock, or breast of a human being.", "level": 0}]}, {"id": 35, "name": "Sexual Contact with a Minor by an Authority Figure", "tca": "39-13-509", "category": "Sexual", "classLines": [{"text": "• A Misdemeanor", "level": 0}], "probation": [{"text": "• Probation Eligible - Yes", "level": 0}], "release": [{"text": "• Release Eligibility - Standard", "level": 0}], "sor": [{"text": "• Sex Offender Registry: No", "level": 0}], "csl": [{"text": "• Community Supervision for Life: No", "level": 0}], "elements": [{"text": "• Intentionally touches or kisses the minor's lips with the defendant's lips for the purpose of sexual arousal or gratification", "level": 0}, {"text": "• Minor is less than eighteen (18) years of age", "level": 0}, {"text": "• Defendant is at least four (4) years older than the victim", "level": 0}, {"text": "• Either:", "level": 0}, {"text": "○ Defendant was in a position of trust or had supervisory or disciplinary power over the minor and used that position or power to accomplish the sexual contact", "level": 1}, {"text": "○ Defendant had parental or custodial authority over the minor and used that authority to accomplish the sexual contact", "level": 1}], "notes": []}, {"id": 36, "name": "Solicitation of a Minor", "tca": "39-13-528", "category": "Sexual", "classLines": [{"text": "• One classification lower than the most serious offense solicited", "level": 0}, {"text": "• If the solicited offense is a Class E felony, Solicitation of a Minor is a Class A misdemeanor", "level": 0}], "probation": [{"text": "• Probation Eligible - Yes", "level": 0}], "release": [{"text": "• Release Eligibility - 100% (attempt included) (only when a felony)", "level": 0}], "sor": [{"text": "• Sex Offender Registry: Depends on classification", "level": 0}, {"text": "○ Class B or C felony = Violent Sexual Offender", "level": 1}, {"text": "○ Class D or E felony or misdemeanor = Sexual Offender", "level": 1}], "csl": [{"text": "• Community Supervision for Life: No", "level": 0}], "elements": [{"text": "• Defendant is eighteen (18) years of age or older", "level": 0}, {"text": "• By oral, written, or electronic communication, electronic mail, internet services, directly or through another", "level": 0}, {"text": "• Intentionally commands, requests, hires, persuades, invites, or attempts to induce another person", "level": 0}, {"text": "• Defendant knows or should know the person is under eighteen (18) years of age, or reasonably believes a law enforcement officer posing as a minor is under eighteen (18) years of age", "level": 0}, {"text": "• Conduct solicited, if completed, would constitute one of the following offenses:", "level": 0}, {"text": "○ Rape of a Child", "level": 1}, {"text": "○ Aggravated Rape", "level": 1}, {"text": "○ Rape", "level": 1}, {"text": "○ Aggravated Sexual Battery", "level": 1}, {"text": "○ Sexual Battery by an Authority Figure", "level": 1}, {"text": "○ Sexual Battery", "level": 1}, {"text": "○ Statutory Rape", "level": 1}, {"text": "○ Especially Aggravated Sexual Exploitation of a Minor", "level": 1}, {"text": "○ Sexual Activity Involving a Minor", "level": 1}, {"text": "○ Trafficking for Commercial Sex Acts", "level": 1}, {"text": "○ Patronizing Prostitution", "level": 1}, {"text": "○ Promoting Prostitution", "level": 1}, {"text": "○ Aggravated Sexual Exploitation of a Minor", "level": 1}], "notes": [{"text": "Special Notes:", "level": 0}, {"text": "• It is no defense that the solicitation was unsuccessful.", "level": 0}, {"text": "• It is no defense that the solicited conduct was never engaged in.", "level": 0}, {"text": "• It is no defense that a law enforcement officer could not actually engage in the solicited conduct.", "level": 0}, {"text": "• It is no defense that the minor was unaware of the criminal nature of the conduct solicited.", "level": 0}, {"text": "• A person may be prosecuted if the solicitation originated outside Tennessee and the solicited minor or law enforcement officer posing as a minor was located in Tennessee.", "level": 0}]}, {"id": 37, "name": "Sexual Exploitation of a Minor - Solicitation of Sexual Activity", "tca": "39-13-529(a)", "category": "Sexual", "classLines": [{"text": "• B Felony", "level": 0}], "probation": [{"text": "• Probation Eligible - Yes", "level": 0}], "release": [{"text": "• Release Eligibility - 100% (attempt included)", "level": 0}], "sor": [{"text": "• Sex Offender Registry: Yes (Sexual Offender)", "level": 0}], "csl": [{"text": "• Community Supervision for Life: No", "level": 0}], "elements": [{"text": "• Defendant is eighteen (18) years of age or older", "level": 0}, {"text": "• By oral, written, or electronic communication, electronic mail, internet service, or webcam communication, directly or through another", "level": 0}, {"text": "• Intentionally commands, hires, persuades, induces, or causes a minor", "level": 0}, {"text": "• Simulated sexual activity that is patently offensive or sexual activity", "level": 0}, {"text": "• Activity is observed by the defendant or another person", "level": 0}], "notes": [{"text": "Special Definitions:", "level": 0}, {"text": "• \"Patently offensive\" means that which goes substantially beyond customary limits of candor in describing or representing such matters.", "level": 0}, {"text": "• \"Sexual activity\" means:", "level": 0}, {"text": "○ Vaginal, anal, or oral intercourse", "level": 1}, {"text": "○ Masturbation", "level": 1}, {"text": "○ Sexual touching of genitals, pubic area, buttocks, or breasts", "level": 1}, {"text": "○ Sadomasochistic abuse", "level": 1}, {"text": "○ Penetration with a body part or object", "level": 1}, {"text": "○ Excretory conduct or depictions", "level": 1}, {"text": "○ Exhibition of breasts, genitals, buttocks, anus, or pubic/rectal area for sexual arousal or gratification", "level": 1}, {"text": "Special Notes:", "level": 0}, {"text": "• It is not a defense that the minor consented to the conduct.", "level": 0}, {"text": "• A person may be prosecuted where the conduct originates in Tennessee, or where the conduct originates outside Tennessee and involves a minor or law enforcement officer posing as a minor located in Tennessee.", "level": 0}]}, {"id": 38, "name": "Sexual Exploitation of a Minor - Sexual Activity in Presence of Minor", "tca": "39-13-529(b)(1)", "category": "Sexual", "classLines": [{"text": "• E Felony", "level": 0}, {"text": "• C Felony if the minor is less than thirteen (13) years of age", "level": 0}], "probation": [{"text": "• Probation Eligible - Yes", "level": 0}], "release": [{"text": "• Release Eligibility - 100% (attempt included)", "level": 0}], "sor": [{"text": "• Sex Offender Registry: Yes (Sexual Offender)", "level": 0}], "csl": [{"text": "• Community Supervision for Life: No", "level": 0}], "elements": [{"text": "• Defendant is eighteen (18) years of age or older", "level": 0}, {"text": "• Intentionally engages in simulated sexual activity that is patently offensive or in sexual activity", "level": 0}, {"text": "• Purpose is to have a minor view the simulated sexual activity or sexual activity", "level": 0}, {"text": "• Minor views the activity:", "level": 0}, {"text": "○ In the presence of the defendant", "level": 1}, {"text": "○ Through electronic communication, electronic mail, internet service, or webcam communications", "level": 1}], "notes": [{"text": "Special Definitions:", "level": 0}, {"text": "• \"Patently offensive\" means that which goes substantially beyond customary limits of candor in describing or representing such matters.", "level": 0}, {"text": "• \"Sexual activity\" means:", "level": 0}, {"text": "○ Vaginal, anal, or oral intercourse, whether done with another person or an animal", "level": 1}, {"text": "○ Masturbation, whether done alone or with another human or an animal", "level": 1}, {"text": "○ Physical contact with or touching of a person's clothed or unclothed genitals, pubic area, buttocks, or breasts in an act of apparent sexual stimulation or sexual abuse", "level": 1}, {"text": "○ Sadomasochistic abuse, including flagellation, torture, physical restraint, domination, or subordination for sexual gratification", "level": 1}, {"text": "○ Insertion of any part of a person's body or any object into another person's anus or vagina, except when done as part of a recognized medical procedure by a licensed professional", "level": 1}, {"text": "○ Conduct, representations, depictions, or descriptions of excretory functions", "level": 1}, {"text": "○ Exhibition of the female breast, genitals, buttocks, anus, or pubic or rectal area that can reasonably be construed as being for the purpose of sexual arousal or gratification of the defendant or another", "level": 1}, {"text": "Special Notes:", "level": 0}, {"text": "• It is not a defense that a minor victim consented to the conduct constituting the offense.", "level": 0}, {"text": "• A person may be prosecuted in Tennessee for conduct that originates in Tennessee, or for conduct originating outside Tennessee involving a minor located in Tennessee or a law enforcement officer posing as a minor located in Tennessee.", "level": 0}, {"text": "• Exception: the victim is at least fifteen (15) years of age but less than eighteen (18) years of age and the defendant is no more than four (4) years older than the victim.", "level": 0}, {"text": "• The age-gap exception does not apply if the defendant intentionally commanded, hired, induced, or caused the victim to engage in the conduct.", "level": 0}]}, {"id": 39, "name": "Sexual Exploitation of a Minor - Display of Sexual Material", "tca": "39-13-529(b)(2)-(3)", "category": "Sexual", "classLines": [{"text": "• E Felony", "level": 0}, {"text": "• C Felony if the minor is less than thirteen (13) years of age", "level": 0}], "probation": [{"text": "• Probation Eligible - Yes", "level": 0}], "release": [{"text": "• Release Eligibility - 100% (attempt included)", "level": 0}], "sor": [{"text": "• Sex Offender Registry: Yes (Sexual Offender)", "level": 0}], "csl": [{"text": "• Community Supervision for Life: No", "level": 0}], "elements": [{"text": "• Defendant is eighteen (18) years of age or older", "level": 0}, {"text": "• Intentionally displays material containing simulated sexual activity that is patently offensive or sexual activity if the purpose of the display can be reasonably construed as being for the sexual arousal or gratification of the minor or the person displaying the material", "level": 0}, {"text": "• Either:", "level": 0}, {"text": "○ Displays the material to a minor", "level": 1}, {"text": "○ Displays the material to a law enforcement officer posing as a minor and whom the defendant reasonably believes is less than eighteen (18) years of age", "level": 1}], "notes": [{"text": "Special Definitions:", "level": 0}, {"text": "• \"Material\" means:", "level": 0}, {"text": "○ Any picture, drawing, photograph, undeveloped film or film negative, motion picture film, videocassette tape, or other pictorial representation", "level": 1}, {"text": "○ Any statue, figure, theatrical production, or electrical reproduction", "level": 1}, {"text": "○ Any image stored on a computer hard drive, computer disk, or other storage medium", "level": 1}, {"text": "○ Any image transmitted to a computer, electronic media, or video screen that is capable of further transmission, manipulation, storage, or access", "level": 1}, {"text": "• \"Patently offensive\" means that which goes substantially beyond customary limits of candor in describing or representing such matters.", "level": 0}, {"text": "• \"Sexual activity\" means:", "level": 0}, {"text": "○ Vaginal, anal, or oral intercourse, whether done with another person or an animal", "level": 1}, {"text": "○ Masturbation, whether done alone or with another human or an animal", "level": 1}, {"text": "○ Physical contact with or touching of a person's clothed or unclothed genitals, pubic area, buttocks, or breasts in an act of apparent sexual stimulation or sexual abuse", "level": 1}, {"text": "○ Sadomasochistic abuse, including flagellation, torture, physical restraint, domination, or subordination for sexual gratification", "level": 1}, {"text": "○ Insertion of any part of a person's body or any object into another person's anus or vagina, except when done as part of a recognized medical procedure by a licensed professional", "level": 1}, {"text": "○ Conduct, representations, depictions, or descriptions of excretory functions", "level": 1}, {"text": "○ Exhibition of the female breast, genitals, buttocks, anus, or pubic or rectal area that can reasonably be construed as being for the purpose of sexual arousal or gratification of the defendant or another", "level": 1}, {"text": "Special Notes:", "level": 0}, {"text": "• It is not a defense that a minor victim consented to the conduct constituting the offense.", "level": 0}, {"text": "• A person may be prosecuted in Tennessee for conduct that originates in Tennessee, or for conduct originating outside Tennessee involving a minor located in Tennessee or a law enforcement officer posing as a minor located in Tennessee.", "level": 0}, {"text": "• Exception: the victim is at least fifteen (15) years of age but less than eighteen (18) years of age and the defendant is no more than four (4) years older than the victim.", "level": 0}, {"text": "• The age-gap exception does not apply if the defendant intentionally commanded, hired, induced, or caused the victim to engage in the conduct.", "level": 0}]}, {"id": 40, "name": "Observation Without Consent", "tca": "39-13-607", "category": "Sexual", "classLines": [{"text": "• A Misdemeanor", "level": 0}, {"text": "• E Felony if victim is under thirteen (13) years of age", "level": 0}], "probation": [{"text": "• Probation Eligible - Yes", "level": 0}], "release": [{"text": "• Release Eligibility - Standard (100% if victim under 13)", "level": 0}], "sor": [{"text": "• Sex Offender Registry: Yes (Sexual Offender) upon third or subsequent conviction", "level": 0}, {"text": "• Sex Offender Registry: Yes (Sexual Offender) if classified as a Class E felony", "level": 0}], "csl": [{"text": "• Community Supervision for Life: No", "level": 0}], "elements": [{"text": "• Knowingly spies upon, observes, or otherwise views an individual", "level": 0}, {"text": "• Individual is in a place where there is a reasonable expectation of privacy", "level": 0}, {"text": "• Without the prior effective consent of the individual", "level": 0}, {"text": "• Viewing would offend or embarrass an ordinary person if the person knew the person was being viewed", "level": 0}, {"text": "• Viewing is for the purpose of sexual arousal or gratification of the defendant", "level": 0}], "notes": [{"text": "Special Notes:", "level": 0}, {"text": "• It is not a defense that the defendant was lawfully on the premises where the offense occurred.", "level": 0}, {"text": "• If the person being viewed is a minor, the offense is committed regardless of whether the minor or the minor's parent or guardian consented to the viewing.", "level": 0}, {"text": "• The State may elect to prosecute the conduct under another applicable statute.", "level": 0}]}, {"id": 41, "name": "Aggravated Unlawful Photographing of a Minor", "tca": "39-13-611", "category": "Sexual", "classLines": [{"text": "• C Felony", "level": 0}], "probation": [{"text": "• Probation Eligible - Yes", "level": 0}], "release": [{"text": "• Release Eligibility - Standard", "level": 0}], "sor": [{"text": "• Sex Offender Registry: Yes (Sexual Offender)", "level": 0}], "csl": [{"text": "• Community Supervision for Life: No", "level": 0}], "elements": [{"text": "• Knowingly photographs, or causes to be photographed, a minor", "level": 0}, {"text": "• Minor has a reasonable expectation of privacy", "level": 0}, {"text": "• Photograph depicts the minor in a state of nudity", "level": 0}, {"text": "• Photograph is taken for the purpose of sexual arousal or gratification of the defendant", "level": 0}], "notes": [{"text": "Special Definitions:", "level": 0}, {"text": "• \"Nudity\" has the meaning given in § 39-17-901.", "level": 0}, {"text": "• \"Photograph\" has the meaning given in § 39-13-605.", "level": 0}, {"text": "Special Notes:", "level": 0}, {"text": "• The State may elect to prosecute conduct under any other applicable statute, including Title 39, Chapter 17, Parts 9 and 10.", "level": 0}]}, {"id": 42, "name": "Unlawful Photography - Expectation of Privacy", "tca": "39-13-605(a)(1)", "category": "Sexual", "classLines": [{"text": "• E Felony", "level": 0}, {"text": "• D Felony if:", "level": 0}, {"text": "○ Defendant disseminates or permits dissemination of the photograph; or", "level": 1}, {"text": "○ Victim is under thirteen (13) years of age; or", "level": 1}, {"text": "○ Defendant uses a minor under thirteen (13) years of age to facilitate the offense", "level": 1}, {"text": "• C Felony if:", "level": 0}, {"text": "○ Defendant disseminates or permits dissemination of the photograph; and", "level": 1}, {"text": "○ Victim is under thirteen (13) years of age; or", "level": 1}, {"text": "○ The defendant was, at the time of the offense, in a position of trust, or had supervisory or disciplinary power over the victim by virtue of the defendant's legal, professional, or occupational status and used the position of trust or power to accomplish the unlawful photography.", "level": 1}], "probation": [{"text": "• Probation Eligible - Yes", "level": 0}], "release": [{"text": "• Release Eligibility - Standard (100% if victim under 13)", "level": 0}], "sor": [{"text": "• Sex Offender Registry: Yes (Sexual Offender)", "level": 0}], "csl": [{"text": "• Community Supervision for Life: No", "level": 0}], "elements": [{"text": "• Knowingly photographs, or causes to be photographed, an individual", "level": 0}, {"text": "• Individual has a reasonable expectation of privacy", "level": 0}, {"text": "• Without the prior effective consent of the individual, or in the case of a minor, without the prior effective consent of the minor's parent or legal guardian", "level": 0}, {"text": "• Either:", "level": 0}, {"text": "○ Photograph would offend or embarrass an ordinary person if the person appeared in the photograph and was taken for the purpose of sexual arousal or gratification of the defendant; or", "level": 1}, {"text": "○ Includes the unclothed intimate area of the individual or the individual engaged in sexual activity, as defined in § 39-17-1002, and the person knew that the photograph would include such content.", "level": 1}], "notes": [{"text": "Special Definitions:", "level": 0}, {"text": "• \"Intimate area\" means the naked or clothed genitals, pubic area, anus, buttocks, or female breast of a person.", "level": 0}, {"text": "• \"Photograph\" means any photograph or photographic reproduction, whether taken using digital media or conventional film, still or moving, or any videotape, live television transmission, or social media broadcast of any individual.", "level": 0}, {"text": "• An individual has a reasonable expectation of privacy if:", "level": 0}, {"text": "○ The photograph is taken in a manner that would offend or embarrass a reasonable person; and", "level": 1}, {"text": "○ The photograph depicts areas of the individual's body, clothed or unclothed, that would not be visible to ordinary observation but for the offensive or embarrassing manner of photography.", "level": 1}, {"text": "Special Notes:", "level": 0}, {"text": "• All photographs taken in violation of this section shall be confiscated and, after use as evidence, disposed of according to law.", "level": 0}, {"text": "• The State may elect to prosecute conduct under any other applicable statute, including Title 39, Chapter 17, Parts 9 and 10.", "level": 0}, {"text": "• The statute of limitations is tolled during any period the defendant conceals the crime until the victim discovers the crime.", "level": 0}]}, {"id": 43, "name": "Unlawful Photography - Dissemination", "tca": "39-13-605(a)(2)", "category": "Sexual", "classLines": [{"text": "• First offense: B Misdemeanor", "level": 0}, {"text": "• Second or subsequent offense: A Misdemeanor", "level": 0}], "probation": [{"text": "• Probation Eligible - Yes", "level": 0}], "release": [{"text": "• Release Eligibility - Standard", "level": 0}], "sor": [{"text": "• Sex Offender Registry: Discretionary when misdemeanor", "level": 0}], "csl": [{"text": "• Community Supervision for Life: No", "level": 0}], "elements": [{"text": "• Knowingly photographs, or causes to be photographed, an individual", "level": 0}, {"text": "• Individual has a reasonable expectation of privacy", "level": 0}, {"text": "• Without the prior effective consent of the individual, or in the case of a minor, without the prior effective consent of the minor's parent or legal guardian", "level": 0}, {"text": "• Photograph includes the unclothed intimate area of the individual", "level": 0}, {"text": "• Photograph would be considered offensive or embarrassing by the individual", "level": 0}, {"text": "• Photograph was taken for the purpose of offending, intimidating, embarrassing, ridiculing, or harassing the victim", "level": 0}, {"text": "• Either:", "level": 0}, {"text": "○ Defendant disseminated the photograph", "level": 1}, {"text": "○ Defendant threatened to disseminate the photograph", "level": 1}, {"text": "○ Defendant permitted dissemination of the photograph", "level": 1}], "notes": [{"text": "Special Definitions:", "level": 0}, {"text": "• \"Disseminate\" means to transfer, publish, or otherwise make accessible.", "level": 0}, {"text": "• \"Intimate area\" means the naked or clothed genitals, pubic area, anus, buttocks, or female breast of a person.", "level": 0}, {"text": "• \"Photograph\" means any photograph or photographic reproduction, whether taken using digital media or conventional film, still or moving, or any videotape, live television transmission, or social media broadcast of any individual.", "level": 0}, {"text": "• An individual has a reasonable expectation of privacy if:", "level": 0}, {"text": "○ The photograph is taken in a manner that would offend or embarrass a reasonable person; and", "level": 1}, {"text": "○ The photograph depicts areas of the individual's body, clothed or unclothed, that would not be visible to ordinary observation but for the offensive or embarrassing manner of photography.", "level": 1}, {"text": "Special Notes:", "level": 0}, {"text": "• All photographs taken in violation of this section shall be confiscated and, after use as evidence, disposed of according to law.", "level": 0}, {"text": "• The State may elect to prosecute conduct under any other applicable statute, including Title 39, Chapter 17, Parts 9 and 10.", "level": 0}, {"text": "• The statute of limitations is tolled during any period the defendant conceals the crime until the victim discovers the crime.", "level": 0}]}, {"id": 44, "name": "Unlawful Photography - No Expectation of Privacy", "tca": "39-13-605(a)(3)", "category": "Sexual", "classLines": [{"text": "• E Felony", "level": 0}, {"text": "• D Felony if:", "level": 0}, {"text": "○ Defendant disseminates or permits dissemination of the photograph; or", "level": 1}, {"text": "○ Victim is under thirteen (13) years of age; or", "level": 1}, {"text": "○ Defendant uses a minor under thirteen (13) years of age to facilitate the offense", "level": 1}, {"text": "• C Felony if:", "level": 0}, {"text": "○ Defendant disseminates or permits dissemination of the photograph; and", "level": 1}, {"text": "○ Victim is under thirteen (13) years of age; or", "level": 1}, {"text": "○ The defendant was, at the time of the offense, in a position of trust, or had supervisory or disciplinary power over the victim by virtue of the defendant's legal, professional, or occupational status and used the position of trust or power to accomplish the unlawful photography.", "level": 1}], "probation": [{"text": "• Probation Eligible - Yes", "level": 0}], "release": [{"text": "• Release Eligibility - Standard", "level": 0}], "sor": [{"text": "• Sex Offender Registry: Yes (Sexual Offender)", "level": 0}], "csl": [{"text": "• Community Supervision for Life: No", "level": 0}], "elements": [{"text": "• Knowingly photographs, or causes to be photographed, an individual", "level": 0}, {"text": "• Without the prior effective consent of the individual, or in the case of a minor, without the prior effective consent of the minor's parent or legal guardian", "level": 0}, {"text": "• Photograph is focused on the intimate area of the individual", "level": 0}, {"text": "• Photograph would be considered offensive or embarrassing by the individual", "level": 0}, {"text": "• Photograph was taken for the purpose of sexual arousal or gratification of the defendant", "level": 0}], "notes": [{"text": "Special Definitions:", "level": 0}, {"text": "• \"Intimate area\" means the naked or clothed genitals, pubic area, anus, buttocks, or female breast of a person.", "level": 0}, {"text": "• \"Photograph\" means any photograph or photographic reproduction, whether taken using digital media or conventional film, still or moving, or any videotape, live television transmission, or social media broadcast of any individual.", "level": 0}, {"text": "Special Notes:", "level": 0}, {"text": "• Unlike subdivisions (a)(1) and (a)(2), this offense does not require that the individual have a reasonable expectation of privacy.", "level": 0}, {"text": "• All photographs taken in violation of this section shall be confiscated and, after use as evidence, disposed of according to law.", "level": 0}, {"text": "• The State may elect to prosecute conduct under any other applicable statute, including Title 39, Chapter 17, Parts 9 and 10.", "level": 0}, {"text": "• The statute of limitations is tolled during any period the defendant conceals the crime until the victim discovers the crime.", "level": 0}]}, {"id": 45, "name": "Continuous Sexual Abuse of a Child", "tca": "39-13-518", "category": "Sexual", "classLines": [{"text": "• A Felony if three (3) or more acts constitute:", "level": 0}, {"text": "○ Aggravated Rape", "level": 1}, {"text": "○ Rape", "level": 1}, {"text": "○ Aggravated Sexual Battery", "level": 1}, {"text": "○ Rape of a Child", "level": 1}, {"text": "○ Soliciting Sexual Exploitation of a Minor", "level": 1}, {"text": "○ Aggravated Rape of a Child", "level": 1}, {"text": "○ Trafficking for a Commercial Sex Act involving a minor", "level": 1}, {"text": "○ Promoting Prostitution involving a minor", "level": 1}, {"text": "• B Felony if two (2) acts constitute offenses listed above", "level": 0}, {"text": "• C Felony if one (1) act constitutes an offense listed above", "level": 0}, {"text": "• C Felony if at least three (3) acts constitute:", "level": 0}, {"text": "○ Sexual Battery by an Authority Figure", "level": 1}, {"text": "• Punishable within full range of the offense", "level": 0}], "probation": [{"text": "• Probation Eligible - No", "level": 0}], "release": [{"text": "• Release Eligibility - 100% (attempt included)", "level": 0}], "sor": [{"text": "• Sex Offender Registry: Yes (Violent Sexual Offender)", "level": 0}], "csl": [{"text": "• Community Supervision for Life: Yes", "level": 0}], "elements": [{"text": "• Engages in multiple acts of sexual abuse of a child", "level": 0}, {"text": "• Either:", "level": 0}, {"text": "○ Over a period of ninety (90) days or more:", "level": 1}, {"text": "▪ Three (3) or more incidents of sexual abuse involving the same minor child on separate occasions", "level": 2}, {"text": "▪ At least one (1) incident of sexual abuse involving three (3) or more different minor children on separate occasions", "level": 2}, {"text": "○ Over a period of less than ninety (90) days:", "level": 1}, {"text": "▪ Five (5) or more incidents of sexual abuse involving two (2) or more different minor children on separate occasions", "level": 2}, {"text": "• The victims of the incidents of sexual abuse of a child share distinctive, common characteristics, qualities or circumstances with respect to each other or to the person committing the offenses, or there are common methods or characteristics in the commission of the offense, allowing otherwise individual offenses to merge into a single continuing offense involving a pattern of criminal activity against similar victims.", "level": 0}], "notes": [{"text": "• Common characteristics, qualities, or circumstances include:", "level": 0}, {"text": "○ Victims are related to the defendant by blood or marriage", "level": 1}, {"text": "○ Victims reside with the defendant", "level": 1}, {"text": "○ Defendant was an authority figure to the victims and the victims knew each other", "level": 1}, {"text": "• \"Sexual abuse of a child\" means:", "level": 0}, {"text": "○ Aggravated Rape", "level": 1}, {"text": "○ Rape", "level": 1}, {"text": "○ Aggravated Sexual Battery", "level": 1}, {"text": "○ Rape of a Child", "level": 1}, {"text": "○ Sexual Battery by an Authority Figure", "level": 1}, {"text": "○ Soliciting Sexual Exploitation of a Minor", "level": 1}, {"text": "○ Aggravated Rape of a Child", "level": 1}, {"text": "○ Statutory Rape by an Authority Figure", "level": 1}, {"text": "○ Trafficking for a Commercial Sex Act involving a minor", "level": 1}, {"text": "○ Promoting Prostitution involving a minor", "level": 1}, {"text": "• At least thirty (30) days prior to trial, the state shall file with the court a written notice identifying the multiple acts of sexual abuse of a child upon which the violation of this section is based. The notice shall include the identity of the victim and the statutory offense violated. Upon good cause, and where the defendant was unaware of the predicate offenses listed in the notice, the trial court may grant a continuance to facilitate proper notification of the incidents of sexual abuse of a child and for preparation by the defense of such incidents specified in the statement.", "level": 0}, {"text": "• The state may charge alternative violations of this section and of the separate offenses committed within the same time period. The separate incidents shall be alleged in separate counts and joined in the same action. A person may be convicted either of one (1) criminal violation of this section, or for one (1) or more of the separate incidents of sexual abuse of a child committed within the county in which the charges were filed, but not both. The state shall not be required to elect submission to the jury of the several counts. The jury shall be instructed to return a verdict on all counts in the indictment. In the event that a verdict of guilty is returned on a separate count that was included in the notice of separate incidents of sexual abuse of a child and the jury returns a verdict of guilty for a violation of this section, at the sentencing hearing the trial judge shall merge the separate count into the conviction under this section and only impose a sentence under this section. A conviction for a violation of this section bars the prosecution of the individual incidents of sexual abuse of a child as separate offenses described in the pretrial notice filed by the state and presented to the jury. A prosecution for a violation of this section does not bar a prosecution in the same action for individual incidents of sexual abuse not identified in the state's pretrial notice. The state shall be required to elect as to those individual incidents of sexual abuse not contained in the pretrial notice prior to submission to the jury. A conviction for such elected offenses shall not be subject to merger at sentencing.", "level": 0}]}, {"id": 46, "name": "Incest", "tca": "39-15-302", "category": "Sexual", "classLines": [{"text": "• C Felony", "level": 0}, {"text": "• B Felony if victim is a minor", "level": 0}, {"text": "• If victim is a minor:", "level": 0}, {"text": "○ Mandatory Range II sentencing minimum", "level": 1}, {"text": "○ Range II offender (may be sentenced within Range III if appropriate)", "level": 1}], "probation": [{"text": "• Probation Eligible - Yes (unless victim is minor)", "level": 0}], "release": [{"text": "• Release Eligibility - 100% (attempt included)", "level": 0}], "sor": [{"text": "• Sex Offender Registry: Yes (Violent Sexual Offender)", "level": 0}], "csl": [{"text": "• Community Supervision for Life: No", "level": 0}], "elements": [{"text": "• Engages in sexual penetration", "level": 0}, {"text": "• Knows the other person is:", "level": 0}, {"text": "○ Natural parent", "level": 1}, {"text": "○ Child", "level": 1}, {"text": "○ Grandparent", "level": 1}, {"text": "○ Grandchild", "level": 1}, {"text": "○ Uncle", "level": 1}, {"text": "○ Aunt", "level": 1}, {"text": "○ Nephew", "level": 1}, {"text": "○ Niece", "level": 1}, {"text": "○ Stepparent", "level": 1}, {"text": "○ Stepchild", "level": 1}, {"text": "○ Adoptive parent", "level": 1}, {"text": "○ Adoptive child", "level": 1}, {"text": "○ Brother or sister of the whole blood", "level": 1}, {"text": "○ Brother or sister of the half blood", "level": 1}], "notes": [{"text": "Special Definitions:", "level": 0}, {"text": "• \"Sexual penetration\" means sexual intercourse, cunnilingus, fellatio, anal intercourse, or any other intrusion, however slight, of any part of a person's body or of any object into the genital or anal openings of the alleged victim's, the defendant's, or any other person's body, but emission of semen is not required.", "level": 0}]}, {"id": 47, "name": "Grooming a Minor - Non position of trust", "tca": "39-13-536(b)", "category": "Sexual", "classLines": [{"text": "• A Misdemeanor", "level": 0}, {"text": "• D Felony if the course of grooming conduct includes one or more predicate acts described in § 39-13-536(a)(4)(D) or (E)", "level": 0}, {"text": "• C Felony if the minor is under thirteen (13) years of age", "level": 0}, {"text": "• B Felony if:", "level": 0}, {"text": "○ The course of grooming conduct includes one or more predicate acts described in § 39-13-536(a)(4)(D) or (E); and", "level": 1}, {"text": "○ The minor is under thirteen (13) years of age", "level": 1}], "probation": [{"text": "• Probation Eligible - Yes", "level": 0}], "release": [{"text": "• Release Eligibility - Standard", "level": 0}], "sor": [{"text": "• Sex Offender Registry: Yes (Violent Sexual Offender)", "level": 0}], "csl": [{"text": "• Community Supervision for Life: No", "level": 0}], "elements": [{"text": "• Engages in a course of grooming conduct directed at a minor", "level": 0}, {"text": "• Specific intent to:", "level": 0}, {"text": "○ Commit, or facilitate the commission by another person of, a sexual offense or violent sexual offense against the minor", "level": 1}, {"text": "○ Cause or induce the minor to engage in simulated sexual activity that is patently offensive or sexual activity", "level": 1}, {"text": "• Either:", "level": 0}, {"text": "○ Minor is under thirteen (13) years of age and defendant is eighteen (18) years of age or older", "level": 1}, {"text": "○ Minor is at least thirteen (13) years of age but less than eighteen (18) years of age and defendant is at least ten (10) years older than the minor", "level": 1}], "notes": [{"text": "Special Definitions:", "level": 0}, {"text": "• \"Course of grooming conduct\" means a pattern of two (2) or more predicate acts directed at the same minor evidencing a continuity of purpose.", "level": 0}, {"text": "• \"Predicate act\" means:", "level": 0}, {"text": "○ Access and isolation conduct", "level": 1}, {"text": "○ Secrecy cultivation", "level": 1}, {"text": "○ Dependency-building", "level": 1}, {"text": "○ Physical boundary violations", "level": 1}, {"text": "○ Sexual content introduction", "level": 1}, {"text": "• \"Sexual activity\" has the same meaning provided in § 39-13-529(d).", "level": 0}, {"text": "Special Notes:", "level": 0}, {"text": "• This statute is intended to address preparatory grooming conduct that does not constitute a completed offense under § 39-13-528, § 39-13-529, § 39-17-1003, § 39-17-1004, or § 39-17-1005.", "level": 0}, {"text": "• A defendant may not be convicted under this section and § 39-13-528 or § 39-13-529 arising from the same course of conduct. Prosecution proceeds under the higher-grade offense.", "level": 0}, {"text": "• It is not a defense that:", "level": 0}, {"text": "○ No sexual contact or sexual offense was completed", "level": 1}, {"text": "○ The minor assented to or was unaware of the grooming conduct", "level": 1}, {"text": "○ The minor consented to any predicate act", "level": 1}, {"text": "○ The minor misrepresented the minor's age", "level": 1}, {"text": "• The existence of a close personal, mentoring, educational, or religious relationship alone does not constitute grooming conduct or grooming intent.", "level": 0}]}, {"id": 48, "name": "Grooming a Minor - Position of Trust", "tca": "39-13-536(c)", "category": "Sexual", "classLines": [{"text": "• D Felony", "level": 0}, {"text": "• C Felony if:", "level": 0}, {"text": "○ The course of grooming conduct includes one or more predicate acts described in § 39-13-536(a)(4)(D) or (E)", "level": 1}, {"text": "○ The minor is under thirteen (13) years of age", "level": 1}, {"text": "• B Felony if:", "level": 0}, {"text": "○ The course of grooming conduct includes one or more predicate acts described in § 39-13-536(a)(4)(D) or (E); and", "level": 1}, {"text": "○ The minor is under thirteen (13) years of age", "level": 1}], "probation": [{"text": "• Probation Eligible - Yes", "level": 0}], "release": [{"text": "• Release Eligibility - Standard", "level": 0}], "sor": [{"text": "• Sex Offender Registry: Yes (Violent Sexual Offender)", "level": 0}], "csl": [{"text": "• Community Supervision for Life: No", "level": 0}], "elements": [{"text": "• Defendant is in a position of authority or a position of special trust with respect to a minor", "level": 0}, {"text": "• Defendant is at least four (4) years older than the minor", "level": 0}, {"text": "• Engages in a course of grooming conduct directed at the minor", "level": 0}, {"text": "• Specific intent to:", "level": 0}, {"text": "○ Commit, or facilitate the commission by another person of, a sexual offense or violent sexual offense against the minor", "level": 1}, {"text": "○ Cause or induce the minor to engage in simulated sexual activity that is patently offensive", "level": 1}, {"text": "○ Cause or induce the minor to engage in sexual activity", "level": 1}], "notes": [{"text": "Special Definitions:", "level": 0}, {"text": "• \"Course of grooming conduct\" means a pattern of two (2) or more predicate acts directed at the same minor and evidencing a continuity of purpose.", "level": 0}, {"text": "• \"Position of authority\" means the defendant is in a position of trust, or had supervisory, disciplinary, custodial, or evaluative power over a minor by virtue of the defendant's legal, professional, occupational, or organizational status.", "level": 0}, {"text": "• \"Position of special trust\" means a relationship in which a minor has been entrusted to a person's care, supervision, or guidance by a parent, guardian, or by operation of law, and the minor reasonably relies on the person for guidance, safety, or support.", "level": 0}, {"text": "• \"Predicate act\" means:", "level": 0}, {"text": "○ Access and isolation conduct", "level": 1}, {"text": "○ Secrecy cultivation", "level": 1}, {"text": "○ Dependency-building", "level": 1}, {"text": "○ Physical boundary violations", "level": 1}, {"text": "○ Sexual content introduction", "level": 1}, {"text": "• \"Sexual activity\" has the same meaning provided in § 39-13-529(d).", "level": 0}, {"text": "Special Notes:", "level": 0}, {"text": "• This statute is intended to address preparatory grooming conduct that does not constitute a completed offense under § 39-13-528, § 39-13-529, § 39-17-1003, § 39-17-1004, or § 39-17-1005.", "level": 0}, {"text": "• A defendant may not be convicted under this section and § 39-13-528 or § 39-13-529 arising from the same course of conduct. Prosecution proceeds under the higher-grade offense.", "level": 0}, {"text": "• It is not a defense that:", "level": 0}, {"text": "○ No sexual contact or sexual offense was completed", "level": 1}, {"text": "○ The minor assented to or was unaware of the grooming conduct", "level": 1}, {"text": "○ The minor consented to any predicate act", "level": 1}, {"text": "○ The minor misrepresented the minor's age", "level": 1}, {"text": "• The existence of a close personal, mentoring, educational, or religious relationship alone does not constitute grooming conduct or grooming intent.", "level": 0}, {"text": "• This section does not prohibit:", "level": 0}, {"text": "○ Lawful educational instruction", "level": 1}, {"text": "○ Medical diagnosis, examination, or treatment", "level": 1}, {"text": "○ Child-protection investigations", "level": 1}, {"text": "○ Age-appropriate conversations by parents, guardians, or siblings", "level": 1}, {"text": "○ Appropriate professional, educational, athletic, or caregiving contact", "level": 1}, {"text": "○ Law enforcement investigations or undercover operations", "level": 1}]}, {"id": 49, "name": "Patronizing Prostitution of a Minor", "tca": "39-13-514(a)(2)(B)-(D)", "category": "Sexual", "classLines": [{"text": "• B Felony if:", "level": 0}, {"text": "○ Subject of the offense is a law enforcement officer eighteen (18) years of age or older posing as a minor", "level": 1}, {"text": "○ Subject of the offense is a person with an intellectual disability", "level": 1}, {"text": "• A Felony if:", "level": 0}, {"text": "○ Subject of the offense is less than eighteen (18) years of age", "level": 1}], "probation": [{"text": "• Probation Eligible - Yes (unless A felony)", "level": 0}], "release": [{"text": "• Release Eligibility - 100% (attempt included)", "level": 0}], "sor": [{"text": "• Sex Offender Registry: Yes (Sexual Offender)", "level": 0}], "csl": [{"text": "• Community Supervision for Life: No", "level": 0}], "elements": [{"text": "• Patronizes prostitution", "level": 0}, {"text": "• Subject of the offense is:", "level": 0}, {"text": "○ A law enforcement officer eighteen (18) years of age or older posing as a minor", "level": 1}, {"text": "○ A person less than eighteen (18) years of age", "level": 1}], "notes": [{"text": "Special Definitions:", "level": 0}, {"text": "• \"Patronizing prostitution\" means:", "level": 0}, {"text": "○ Soliciting another person with the intent that the other person engage in prostitution", "level": 1}, {"text": "○ Entering or remaining in a house of prostitution for the purpose of engaging in sexual activity", "level": 1}, {"text": "• \"Prostitution\" means:", "level": 0}, {"text": "○ Engaging in, or offering to engage in, sexual activity as a business", "level": 1}, {"text": "○ Being an inmate in a house of prostitution", "level": 1}, {"text": "○ Loitering in a public place for the purpose of being hired to engage in sexual activity", "level": 1}, {"text": "• \"Sexual activity\" means any sexual relations including homosexual sexual relations.", "level": 0}, {"text": "Special Notes:", "level": 0}, {"text": "• It is not a defense that:", "level": 0}, {"text": "○ The subject of the offense is a law enforcement officer", "level": 1}, {"text": "○ The victim is a minor and consented to the offense", "level": 1}, {"text": "○ The solicitation was unsuccessful", "level": 1}, {"text": "○ The conduct solicited was not engaged in", "level": 1}, {"text": "○ The law enforcement officer could not engage in the solicited offense", "level": 1}]}, {"id": 50, "name": "Promoting Prostitution of a Minor", "tca": "39-13-515(a)(2) and (c)", "category": "Sexual", "classLines": [{"text": "• E Felony", "level": 0}, {"text": "• A Felony if:", "level": 0}, {"text": "○ Person involved in prostitution is more than twelve (12) years of age but less than eighteen (18) years of age", "level": 1}, {"text": "○ Person involved in prostitution has an intellectual disability", "level": 1}], "probation": [{"text": "• Probation Eligible - Yes (unless A felony)", "level": 0}], "release": [{"text": "• Release Eligibility - 100% (attempt included)", "level": 0}], "sor": [{"text": "• Sex Offender Registry: Yes (Sexual Offender)", "level": 0}], "csl": [{"text": "• Community Supervision for Life: No", "level": 0}], "elements": [{"text": "• Promotes prostitution", "level": 0}, {"text": "• Subject of the offense is:", "level": 0}, {"text": "○ A law enforcement officer", "level": 1}, {"text": "○ A law enforcement officer eighteen (18) years of age or older posing as a minor", "level": 1}, {"text": "○ A person more than twelve (12) years of age but less than eighteen (18) years of age", "level": 1}, {"text": "○ A person with an intellectual disability", "level": 1}], "notes": [{"text": "Special Definitions:", "level": 0}, {"text": "• \"Promoting prostitution\" means:", "level": 0}, {"text": "○ Owning, controlling, managing, supervising, or keeping a business or house of prostitution", "level": 1}, {"text": "○ Procuring an inmate for a house of prostitution", "level": 1}, {"text": "○ Encouraging, inducing, or purposely causing another to become a prostitute", "level": 1}, {"text": "○ Soliciting a person to patronize a prostitute", "level": 1}, {"text": "○ Procuring a prostitute for a patron", "level": 1}, {"text": "○ Soliciting, receiving, or agreeing to receive a benefit for engaging in any of the foregoing activities", "level": 1}, {"text": "• \"Prostitution\" means:", "level": 0}, {"text": "○ Engaging in, or offering to engage in, sexual activity as a business", "level": 1}, {"text": "○ Being an inmate in a house of prostitution", "level": 1}, {"text": "○ Loitering in a public place for the purpose of being hired to engage in sexual activity", "level": 1}, {"text": "• \"Sexual activity\" means any sexual relations, including homosexual sexual relations.", "level": 0}, {"text": "Special Notes:", "level": 0}, {"text": "• It is not a defense that:", "level": 0}, {"text": "○ The subject of the offense is a law enforcement officer", "level": 1}, {"text": "○ The victim is a minor and consented to the offense", "level": 1}, {"text": "○ The solicitation was unsuccessful", "level": 1}, {"text": "○ The conduct solicited was not engaged in", "level": 1}, {"text": "○ A law enforcement officer could not engage in the solicited offense", "level": 1}]}, {"id": 51, "name": "Trafficking a Person for a Commercial Sex Act", "tca": "39-13-309", "category": "Sexual", "classLines": [{"text": "• B Felony", "level": 0}, {"text": "• A Felony if victim is more than twelve (12) years of age but less than eighteen (18) years of age", "level": 0}], "probation": [{"text": "• Probation Eligible - Yes (unless A felony)", "level": 0}], "release": [{"text": "• Release Eligibility - 100% (attempt included)", "level": 0}], "sor": [{"text": "• Sex Offender Registry: Yes (Violent Sexual Offender)", "level": 0}], "csl": [{"text": "• Community Supervision for Life: No", "level": 0}], "elements": [{"text": "• Either:", "level": 0}, {"text": "○ Knowingly subjects, attempts to subject, benefits from, or attempts to benefit from another person's provision of a commercial sex act", "level": 1}, {"text": "○ Recruits, entices, harbors, transports, provides, purchases, or otherwise obtains another person for the purpose of providing a commercial sex act", "level": 1}, {"text": "○ Commits either of the above acts when the intended victim is a law enforcement officer or a law enforcement officer eighteen (18) years of age or older posing as a minor", "level": 1}], "notes": [{"text": "Special Definitions:", "level": 0}, {"text": "• \"Commercial sex act\" means:", "level": 0}, {"text": "○ Any sexually explicit conduct for which anything of value is directly or indirectly given, promised to, or received by any person, which conduct is induced or obtained by coercion or deception or which conduct is induced or obtained from a person under eighteen (18) years of age", "level": 1}, {"text": "○ Any sexually explicit conduct that is performed or provided by any person, which conduct is induced or obtained by coercion or deception or which conduct is induced or obtained from a person under eighteen (18) years of age", "level": 1}, {"text": "• \"Sexually explicit conduct\" means:", "level": 0}, {"text": "○ Sexual intercourse", "level": 1}, {"text": "○ Bestiality", "level": 1}, {"text": "○ Masturbation", "level": 1}, {"text": "○ Lewd exhibition of the genitals or pubic area", "level": 1}, {"text": "○ Flagellation or torture of a nude person", "level": 1}, {"text": "○ Physical restraint of a nude person", "level": 1}, {"text": "○ Physical contact with unclothed genitals, pubic area, buttocks, or female breasts for sexual stimulation or gratification", "level": 1}, {"text": "○ Defecation or urination for sexual stimulation", "level": 1}, {"text": "○ Penetration of the vagina or rectum by an object, except as part of a recognized medical procedure", "level": 1}, {"text": "Special Notes:", "level": 0}, {"text": "• For purposes of subsection (a)(2), the means used may include:", "level": 0}, {"text": "○ Physical harm or threats of physical harm", "level": 1}, {"text": "○ Physical restraint or threats of physical restraint", "level": 1}, {"text": "○ Abuse or threatened abuse of law or legal process", "level": 1}, {"text": "○ Confiscation or possession of identification or immigration documents", "level": 1}, {"text": "○ Blackmail", "level": 1}, {"text": "○ Financial control", "level": 1}, {"text": "○ Facilitating or controlling access to a controlled substance", "level": 1}, {"text": "• It is not a defense that:", "level": 0}, {"text": "○ The intended victim is a law enforcement officer", "level": 1}, {"text": "○ A minor consented to the conduct", "level": 1}, {"text": "○ The solicitation was unsuccessful", "level": 1}, {"text": "○ The conduct solicited was not engaged in", "level": 1}, {"text": "○ A law enforcement officer could not engage in the solicited offense", "level": 1}, {"text": "○ The defendant was ignorant or mistaken as to the age of a minor", "level": 1}]}, {"id": 52, "name": "Sexual Exploitation of a Minor", "tca": "39-17-1003", "category": "CSAM", "classLines": [{"text": "• D Felony", "level": 0}, {"text": "• C Felony if more than fifty (50) images, materials, or combination of images and materials are possessed", "level": 0}, {"text": "• B Felony if more than one hundred (100) images, materials, or combination of images and materials are possessed", "level": 0}], "probation": [{"text": "• Probation Eligible - No", "level": 0}], "release": [{"text": "• Release Eligibility - 100% (attempt included)", "level": 0}], "sor": [{"text": "• Sex Offender Registry: Yes (Sexual Offender)", "level": 0}], "csl": [{"text": "• Community Supervision for Life: No", "level": 0}], "elements": [{"text": "• Knowingly possesses material", "level": 0}, {"text": "• Material includes a minor engaged in:", "level": 0}, {"text": "○ Sexual activity", "level": 1}, {"text": "○ Simulated sexual activity that is patently offensive", "level": 1}], "notes": [{"text": "Special Definitions:", "level": 0}, {"text": "• \"Material\" means:", "level": 0}, {"text": "○ Any picture, drawing, photograph, undeveloped film, film negative, motion picture film, videocassette tape, or other pictorial representation", "level": 1}, {"text": "○ Any statue, figure, theatrical production, or electrical reproduction", "level": 1}, {"text": "○ Any image stored on a computer hard drive, computer disk, or other storage medium", "level": 1}, {"text": "○ Any image transmitted to a computer, electronic media, or video screen", "level": 1}, {"text": "○ Any computer image or computer-generated image, including one created, adapted, or modified by artificial intelligence", "level": 1}, {"text": "• \"Patently offensive\" means that which goes substantially beyond customary limits of candor in describing or representing such matters.", "level": 0}, {"text": "• \"Sexual activity\" means:", "level": 0}, {"text": "○ Vaginal, anal, or oral intercourse", "level": 1}, {"text": "○ Masturbation", "level": 1}, {"text": "○ Physical contact with or touching of a person's clothed or unclothed genitals, pubic area, buttocks, or breasts in an act of apparent sexual stimulation or sexual abuse", "level": 1}, {"text": "○ Sadomasochistic abuse", "level": 1}, {"text": "○ Penetration of the vagina or rectum by a body part or object, except as part of a recognized medical procedure", "level": 1}, {"text": "○ Conduct, depictions, or descriptions of excretory functions", "level": 1}, {"text": "○ Exhibition of the breast, genitals, buttocks, anus, or pubic or rectal area of a minor for sexual arousal or gratification", "level": 1}, {"text": "Special Notes:", "level": 0}, {"text": "• A defendant may be charged in a separate count for each image or item of material possessed.", "level": 0}, {"text": "• Where the number of materials possessed exceeds fifty (50), the State may charge in a single count to enhance the offense classification.", "level": 0}, {"text": "• In determining whether a participant is a minor, the trier of fact may consider:", "level": 0}, {"text": "○ Title or text", "level": 1}, {"text": "○ Visual depiction", "level": 1}, {"text": "○ Internet history", "level": 1}, {"text": "○ Physical development of the person depicted", "level": 1}, {"text": "○ Expert medical testimony", "level": 1}, {"text": "○ Expert computer forensic testimony", "level": 1}, {"text": "○ Any other relevant evidence", "level": 1}, {"text": "• The State is not required to prove the actual identity or age of the minor.", "level": 0}, {"text": "• It is not a defense that the minor consented to the conduct.", "level": 0}]}, {"id": 53, "name": "Aggravated Sexual Exploitation of a Minor", "tca": "39-17-1004", "category": "CSAM", "classLines": [{"text": "• C Felony", "level": 0}, {"text": "• B Felony if the number of individual images, materials, or combination of images and materials exceeds twenty-five (25)", "level": 0}], "probation": [{"text": "• Probation Eligible - No", "level": 0}], "release": [{"text": "• Release Eligibility - 100% (attempt included)", "level": 0}], "sor": [{"text": "• Sex Offender Registry: Yes (Violent Sexual Offender)", "level": 0}], "csl": [{"text": "• Community Supervision for Life: No", "level": 0}], "elements": [{"text": "• Knowingly promotes, sells, distributes, transports, purchases, exchanges, or possesses with intent to promote, sell, distribute, transport, purchase, or exchange material", "level": 0}, {"text": "• Material includes a minor engaged in:", "level": 0}, {"text": "○ Sexual activity", "level": 1}, {"text": "○ Simulated sexual activity that is patently offensive", "level": 1}], "notes": [{"text": "Special Definitions:", "level": 0}, {"text": "• \"Material\" means:", "level": 0}, {"text": "○ Any picture, drawing, photograph, undeveloped film, film negative, motion picture film, videocassette tape, or other pictorial representation", "level": 1}, {"text": "○ Any statue, figure, theatrical production, or electrical reproduction", "level": 1}, {"text": "○ Any image stored on a computer hard drive, computer disk, or other storage medium", "level": 1}, {"text": "○ Any image transmitted to a computer, electronic media, or video screen", "level": 1}, {"text": "○ Any computer image or computer-generated image, including one created, adapted, or modified by artificial intelligence", "level": 1}, {"text": "• \"Patently offensive\" means that which goes substantially beyond customary limits of candor in describing or representing such matters.", "level": 0}, {"text": "• \"Sexual activity\" means:", "level": 0}, {"text": "○ Vaginal, anal, or oral intercourse", "level": 1}, {"text": "○ Masturbation", "level": 1}, {"text": "○ Physical contact with or touching of a person's clothed or unclothed genitals, pubic area, buttocks, or breasts in an act of apparent sexual stimulation or sexual abuse", "level": 1}, {"text": "○ Sadomasochistic abuse", "level": 1}, {"text": "○ Penetration of the vagina or rectum by a body part or object, except as part of a recognized medical procedure", "level": 1}, {"text": "○ Conduct, depictions, or descriptions of excretory functions", "level": 1}, {"text": "○ Exhibition of the breast, genitals, buttocks, anus, or pubic or rectal area of a minor for sexual arousal or gratification", "level": 1}, {"text": "Special Notes:", "level": 0}, {"text": "• A defendant may be charged in a separate count for each image or item of material involved.", "level": 0}, {"text": "• Where the number of materials involved exceeds twenty-five (25), the State may charge in a single count to enhance the offense classification.", "level": 0}, {"text": "• In determining whether a participant is a minor, the trier of fact may consider:", "level": 0}, {"text": "○ Title or text", "level": 1}, {"text": "○ Visual depiction", "level": 1}, {"text": "○ Internet history", "level": 1}, {"text": "○ Physical development of the person depicted", "level": 1}, {"text": "○ Expert medical testimony", "level": 1}, {"text": "○ Expert computer forensic testimony", "level": 1}, {"text": "○ Any other relevant evidence", "level": 1}, {"text": "• The State is not required to prove the actual identity or age of the minor.", "level": 0}, {"text": "• It is not a defense that the minor consented to the conduct.", "level": 0}, {"text": "• A person may be prosecuted in Tennessee for conduct originating in Tennessee or for conduct originating outside Tennessee where the material was promoted, sold, distributed, transported, purchased, exchanged, or possessed within Tennessee.", "level": 0}]}, {"id": 54, "name": "Especially Aggravated Sexual Exploitation of a Minor", "tca": "39-17-1005", "category": "CSAM", "classLines": [{"text": "• B Felony", "level": 0}], "probation": [{"text": "• Probation Eligible - No", "level": 0}], "release": [{"text": "• Release Eligibility - 100% (attempt included)", "level": 0}], "sor": [{"text": "• Sex Offender Registry: Yes (Violent Sexual Offender)", "level": 0}], "csl": [{"text": "• Community Supervision for Life: No", "level": 0}], "elements": [{"text": "• Knowingly promotes, employs, uses, assists, transports, or permits a minor to participate in the performance of, or in the production of, acts or material", "level": 0}, {"text": "• Acts or material include:", "level": 0}, {"text": "○ Sexual activity", "level": 1}, {"text": "○ Simulated sexual activity that is patently offensive", "level": 1}], "notes": [{"text": "Special Definitions:", "level": 0}, {"text": "• \"Material\" means:", "level": 0}, {"text": "○ Any picture, drawing, photograph, undeveloped film, film negative, motion picture film, videocassette tape, or other pictorial representation", "level": 1}, {"text": "○ Any statue, figure, theatrical production, or electrical reproduction", "level": 1}, {"text": "○ Any image stored on a computer hard drive, computer disk, or other storage medium", "level": 1}, {"text": "○ Any image transmitted to a computer, electronic media, or video screen", "level": 1}, {"text": "○ Any computer image or computer-generated image, including one created, adapted, or modified by artificial intelligence", "level": 1}, {"text": "• \"Patently offensive\" means that which goes substantially beyond customary limits of candor in describing or representing such matters.", "level": 0}, {"text": "• \"Sexual activity\" means:", "level": 0}, {"text": "○ Vaginal, anal, or oral intercourse", "level": 1}, {"text": "○ Masturbation", "level": 1}, {"text": "○ Physical contact with or touching of a person's clothed or unclothed genitals, pubic area, buttocks, or breasts in an act of apparent sexual stimulation or sexual abuse", "level": 1}, {"text": "○ Sadomasochistic abuse", "level": 1}, {"text": "○ Penetration of the vagina or rectum by a body part or object, except as part of a recognized medical procedure", "level": 1}, {"text": "○ Conduct, depictions, or descriptions of excretory functions", "level": 1}, {"text": "○ Exhibition of the breast, genitals, buttocks, anus, or pubic or rectal area of a minor for sexual arousal or gratification", "level": 1}, {"text": "Special Notes:", "level": 0}, {"text": "• A defendant may be charged in a separate count for each individual performance, image, picture, drawing, photograph, motion picture film, videocassette tape, or other pictorial representation.", "level": 0}, {"text": "• In determining whether a participant is a minor, the trier of fact may consider:", "level": 0}, {"text": "○ Title or text", "level": 1}, {"text": "○ Visual depiction", "level": 1}, {"text": "○ Internet history", "level": 1}, {"text": "○ Physical development of the person depicted", "level": 1}, {"text": "○ Expert medical testimony", "level": 1}, {"text": "○ Expert computer forensic testimony", "level": 1}, {"text": "○ Any other relevant evidence", "level": 1}, {"text": "• The State is not required to prove the actual identity or age of the minor.", "level": 0}, {"text": "• A person may be prosecuted in Tennessee for conduct originating in Tennessee or for conduct originating outside Tennessee where the performance, production, acts, or material involve a minor within Tennessee.", "level": 0}, {"text": "• It is not a defense that the minor consented to the conduct.", "level": 0}, {"text": "• A conviction under this section does not limit prosecution for other sexual offenses arising from the same conduct, including consecutive sentencing or sentence enhancement where otherwise authorized.", "level": 0}]}];
+    const GUIDES = [{"id": "probation", "shortTitle": "Probation Eligibility", "title": "Probation Eligibility Quick Reference Guide", "sections": [{"header": "Defendant is not eligible for probation if sentence imposed exceeds 10 years.", "statute": "40-35-303(a)(1)", "subgroups": []}, {"header": "CAC Offenses barred from probation regardless of length:", "statute": "40-35-303(a)(1)(A)-(K)", "subgroups": [{"subheader": null, "items": [{"text": "Aggravated Sexual Battery 39-13-504", "qualifier": false}, {"text": "Statutory Rape by an Authority Figure 39-13-532", "qualifier": false}, {"text": "Aggravated Child Abuse 39-15-402(a)", "qualifier": false}, {"text": "Aggravated Child Neglect 39-15-402(a)", "qualifier": false}, {"text": "Aggravated Child Endangerment 39-15-402(a)", "qualifier": false}, {"text": "Sexual Exploitation of a Minor 39-17-1003", "qualifier": false}, {"text": "Aggravated Sexual Exploitation of a Minor 39-17-1004", "qualifier": false}, {"text": "Especially Aggravated Sexual Exploitation of a Minor 39-17-1005", "qualifier": false}, {"text": "Aggravated Kidnapping 39-13-304", "qualifier": false}]}]}]}, {"id": "release", "shortTitle": "Release Eligibility", "title": "Release Eligibility Quick Reference Guide", "sections": [{"header": "100% - No reduction – Attempt Included", "statute": null, "subgroups": [{"subheader": null, "items": [{"text": "Trafficking a Person for a Commercial Sex Act 39-13-309", "qualifier": false}, {"text": "Rape 39-13-503", "qualifier": false}, {"text": "Aggravated Sexual Battery 39-13-504", "qualifier": false}, {"text": "Sexual Battery 39-13-505", "qualifier": false}, {"text": "Aggravated Statutory Rape 39-13-506(c)", "qualifier": false}, {"text": "Patronizing Prostitution of a Minor 39-13-514(a)(2)(B)-(D)", "qualifier": false}, {"text": "* Only when victim is a minor under section (a)(2)(D)", "qualifier": true}, {"text": "Promoting Prostitution of a Minor 39-13-515(a)(2) and (c)", "qualifier": false}, {"text": "Continuous Sexual Abuse of a Child 39-13-518", "qualifier": false}, {"text": "Sexual Battery by an Authority Figure 39-13-527", "qualifier": false}, {"text": "Solicitation of a Minor 39-13-528", "qualifier": false}, {"text": "* Only when a felony offense", "qualifier": true}, {"text": "Sexual Exploitation of a Minor 39-13-529", "qualifier": false}, {"text": "Statutory Rape by an Authority Figure 39-13-532", "qualifier": false}, {"text": "Unlawful Photography Expectation Privacy 39-13-605(a)(1)", "qualifier": false}, {"text": "* Only when victim is under 13 years old", "qualifier": true}, {"text": "Observation Without Consent 39-13-607", "qualifier": false}, {"text": "* Only when the victim is under 13 years old", "qualifier": true}, {"text": "Incest 39-15-302", "qualifier": false}, {"text": "Child Abuse 39-15-401", "qualifier": false}, {"text": "Child Neglect 39-15-401", "qualifier": false}, {"text": "Child Endangerment 39-15-401", "qualifier": false}, {"text": "Aggravated Child Abuse 39-15-402(a)", "qualifier": false}, {"text": "Aggravated Child Neglect 39-15-402(a)", "qualifier": false}, {"text": "Aggravated Child Endangerment 39-15-402(a)", "qualifier": false}, {"text": "Sexual Exploitation of a Minor 39-17-1003", "qualifier": false}, {"text": "Aggravated Sexual Exploitation of a Minor 39-17-1004", "qualifier": false}, {"text": "Especially Aggravated Sexual Exploitation of a Minor 39-17-1005", "qualifier": false}]}]}, {"header": "100% - No Reduction – Attempt not included", "statute": null, "subgroups": [{"subheader": null, "items": [{"text": "Especially Aggravated Kidnapping 39-13-305", "qualifier": false}, {"text": "Aggravated Rape 39-13-502", "qualifier": false}]}]}, {"header": "100% with 15% Reduction – Attempt not included", "statute": null, "subgroups": [{"subheader": null, "items": [{"text": "Aggravated Kidnapping 39-13-304", "qualifier": false}, {"text": "Facilitation of Rape of a Child 39-13-522", "qualifier": false}, {"text": "Facilitation of Aggravated Rape of a Child 39-13-531", "qualifier": false}, {"text": "Aggravated Assault 39-13-102", "qualifier": false}, {"text": "*Only if SBI results", "qualifier": true}]}]}, {"header": "Special – Attempt Not Included (Mandatory Life, LWOP or death)", "statute": null, "subgroups": [{"subheader": null, "items": [{"text": "Especially Aggravated Rape 39-13-534", "qualifier": false}, {"text": "Rape of a Child 39-13-522", "qualifier": false}, {"text": "Aggravated Rape of a Child 39-13-531", "qualifier": false}, {"text": "Especially Aggravated Rape of a Child 39-13-535", "qualifier": false}]}]}]}, {"id": "sor_csl", "shortTitle": "SOR & CSL", "title": "SOR and CSL Quick Reference Guide", "sections": [{"header": "Community Supervision for Life", "statute": "39-13-524", "subgroups": [{"subheader": null, "items": [{"text": "Aggravated Rape 39-13-502", "qualifier": false}, {"text": "Rape 39-13-503", "qualifier": false}, {"text": "Aggravated Sexual Battery 39-13-504", "qualifier": false}, {"text": "Rape of a Child 39-13-522", "qualifier": false}, {"text": "Aggravated Rape of a Child 39-13-531", "qualifier": false}, {"text": "Continuous Sexual Abuse of a Child 39-13-518", "qualifier": false}]}]}, {"header": "Sex Offender Registry (Attempt included for all offenses)", "statute": "40-39-202", "subgroups": [{"subheader": "Violent Sexual Offenders", "items": [{"text": "Aggravated Kidnapping 39-13-304 (when victim is a minor, except if committed by a parent)", "qualifier": false}, {"text": "Especially Aggravated Kidnapping 39-13-305 (when victim is a minor, except if committed by a parent)", "qualifier": false}, {"text": "Rape 39-13-503", "qualifier": false}, {"text": "Aggravated Rape 39-13-502", "qualifier": false}, {"text": "Especially Aggravated Rape 39-13-534", "qualifier": false}, {"text": "Rape of a Child 39-13-522", "qualifier": false}, {"text": "Aggravated Rape of a Child 39-13-531", "qualifier": false}, {"text": "Especially Aggravated Rape of a Child 39-13-535", "qualifier": false}, {"text": "Aggravated Sexual Battery 39-13-504", "qualifier": false}, {"text": "Statutory Rape by an Authority Figure 39-13-532", "qualifier": false}, {"text": "Sexual Battery by an Authority Figure 39-13-527", "qualifier": false}, {"text": "Solicitation of a Minor 39-13-528 (when classified as a Class B or Class C felony)", "qualifier": false}, {"text": "Continuous Sexual Abuse of a Child 39-13-518", "qualifier": false}, {"text": "Incest 39-15-302", "qualifier": false}, {"text": "Grooming a Minor 39-13-536(b)", "qualifier": false}, {"text": "Trafficking a Person for a Commercial Sex Act 39-13-309", "qualifier": false}, {"text": "Promoting Prostitution of a Minor 39-13-515 (Violent Sexual Offender if defendant has a prior promotion conviction)", "qualifier": false}, {"text": "Aggravated Sexual Exploitation of a Minor 39-17-1004", "qualifier": false}, {"text": "Especially Aggravated Sexual Exploitation of a Minor 39-17-1005", "qualifier": false}]}, {"subheader": "Sexual Offenders", "items": [{"text": "False Imprisonment 39-13-302 (when victim is a minor, except if committed by a parent)", "qualifier": false}, {"text": "Kidnapping 39-13-303 (when victim is a minor, except if committed by a parent)", "qualifier": false}, {"text": "Sexual Battery 39-13-505", "qualifier": false}, {"text": "Aggravated Statutory Rape 39-13-506(c)", "qualifier": false}, {"text": "Solicitation of a Minor 39-13-528 (when classified as a Class D or E felony or a misdemeanor)", "qualifier": false}, {"text": "Sexual Exploitation of a Minor 39-13-529", "qualifier": false}, {"text": "Observation Without Consent 39-13-607 (upon 3rd or subsequent conviction, or when classified as a Class E felony)", "qualifier": false}, {"text": "Aggravated Unlawful Photographing of a Minor 39-13-611", "qualifier": false}, {"text": "Unlawful Photography 39-13-605(a)(1) or (a)(3)", "qualifier": false}, {"text": "Patronizing Prostitution of a Minor – § 39-13-514(a)(2)(B)–(D)", "qualifier": false}, {"text": "Promoting Prostitution of a Minor – § 39-13-515 (first offense)", "qualifier": false}, {"text": "Sexual Exploitation of a Minor – § 39-17-1003", "qualifier": false}]}, {"subheader": "Discretionary", "items": [{"text": "Statutory Rape 39-13-506(b) (Sexual Offender if defendant has prior statutory rape convictions)", "qualifier": false}, {"text": "Unlawful Photography: Dissemination – § 39-13-605(a)(2) (If misdemeanor)", "qualifier": false}]}]}]}];
+
+    const state = {
+      activeTab: 'Physical',
+      searchQuery: '',
+      searchScope: 'all', // 'all' | 'tab'
+      expandedIds: new Set(),
+      activeGuideFilter: 'all' // 'all' | 'probation' | 'release' | 'sor_csl'
+    };
+
+    const STATUTE_REGEX = /((?:§\s*)?\d{2}-\d{2}-\d{3,4}(?:\([a-zA-Z0-9]+\))*(?:\s*(?:-|–|and)\s*(?:\([a-zA-Z0-9]+\)|[a-zA-Z0-9]+))*)/g;
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function formatGuideLineHtml(rawText) {
+      const parts = rawText.split(STATUTE_REGEX);
+      return parts.map((part, i) => {
+        if (!part) return '';
+        if (i % 2 === 1) {
+          return `<span class="statute-inline-badge">${escapeHtml(part)}</span>`;
+        }
+        const parenMatch = part.match(/(\s*\([^)]+\)\s*)$/);
+        if (parenMatch && parenMatch[1].trim().length > 6) {
+          const prefix = part.slice(0, parenMatch.index);
+          const suffix = parenMatch[1];
+          return `${escapeHtml(prefix)}<span class="paren-muted">${escapeHtml(suffix)}</span>`;
+        }
+        return escapeHtml(part);
+      }).join('');
+    }
+
+    function renderBulletLines(lines) {
+      return `<div class="line-list">${lines.map(item => {
+        const lvlClass = item.level === 1 ? ' lvl-1' : (item.level === 2 ? ' lvl-2' : '');
+        return `<div class="bullet-line${lvlClass}">${escapeHtml(item.text)}</div>`;
+      }).join('')}</div>`;
+    }
+
+    function renderNotesLines(lines) {
+      return lines.map(item => {
+        const t = item.text;
+        if (t === 'Special Definitions:' || t === 'Special Notes:') {
+          return `<div class="note-subheading">${escapeHtml(t)}</div>`;
+        }
+        const lvlClass = item.level === 1 ? ' lvl-1' : (item.level === 2 ? ' lvl-2' : '');
+        const extraTop = (item.level === 0 && t.startsWith('•')) ? ' style="margin-top:5px;"' : '';
+        return `<div class="bullet-line${lvlClass}"${extraTop}>${escapeHtml(t)}</div>`;
+      }).join('');
+    }
+
+    function matchesQuery(offense, q) {
+      if (!q) return true;
+      const tokens = q.toLowerCase().split(/\s+/).filter(Boolean);
+      const haystack = [
+        offense.name,
+        offense.tca,
+        't.c.a. § ' + offense.tca,
+        offense.category,
+        ...offense.classLines.map(x => x.text),
+        ...offense.probation.map(x => x.text),
+        ...offense.release.map(x => x.text),
+        ...offense.sor.map(x => x.text),
+        ...offense.csl.map(x => x.text),
+        ...offense.elements.map(x => x.text),
+        ...offense.notes.map(x => x.text)
+      ].join(' ').toLowerCase();
+      return tokens.every(tok => haystack.includes(tok));
+    }
+
+    function guideMatchesQuery(guide, q) {
+      if (!q) return true;
+      const tokens = q.toLowerCase().split(/\s+/).filter(Boolean);
+      const chunks = [guide.title];
+      guide.sections.forEach(s => {
+        chunks.push(s.header);
+        if (s.statute) chunks.push(s.statute);
+        s.subgroups.forEach(sg => {
+          if (sg.subheader) chunks.push(sg.subheader);
+          sg.items.forEach(it => chunks.push(it.text));
+        });
+      });
+      const haystack = chunks.join(' ').toLowerCase();
+      return tokens.every(tok => haystack.includes(tok));
+    }
+
+    function renderOffenseCard(o, showCategoryBadge) {
+      const isExpanded = state.expandedIds.has(o.id);
+      const hasNotes = o.notes && o.notes.length > 0;
+      const tapText = isExpanded
+        ? (hasNotes ? '▲ Tap to Collapse Elements & Notes' : '▲ Tap to Collapse Elements')
+        : (hasNotes ? '▼ Tap to View Elements & Notes' : '▼ Tap to View Elements');
+
+      return `
+        <article class="offense-card${isExpanded ? ' expanded' : ''}" data-id="${o.id}">
+          <div class="card-face" onclick="toggleCard(${o.id}, event)">
+            <div class="card-header-row">
+              <h2 class="offense-title">${escapeHtml(o.name)}</h2>
+              ${showCategoryBadge ? `<span class="cat-badge">${escapeHtml(o.category)}</span>` : ''}
+            </div>
+            <div class="tca-badge">T.C.A. &sect; ${escapeHtml(o.tca)}</div>
+
+            <div class="class-box">
+              ${renderBulletLines(o.classLines)}
+            </div>
+
+            <div class="quadrant-split">
+              <div class="split-col-left">
+                <div class="q-probation">${renderBulletLines(o.probation)}</div>
+                <div class="q-release">${renderBulletLines(o.release)}</div>
+              </div>
+              <div class="split-col-right">
+                <div class="q-sor">${renderBulletLines(o.sor)}</div>
+                <div class="q-csl">${renderBulletLines(o.csl)}</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-drawer">
+            <div class="drawer-section">
+              <div class="drawer-label">Essential Elements</div>
+              ${renderBulletLines(o.elements)}
+            </div>
+            ${hasNotes ? `
+              <div class="drawer-section">
+                <div class="drawer-label">Special Definitions &amp; Notes</div>
+                ${renderNotesLines(o.notes)}
+              </div>
+            ` : ''}
+          </div>
+
+          <button type="button" class="tap-bar" onclick="toggleCard(${o.id}, event)" aria-expanded="${isExpanded}">
+            ${tapText}
+          </button>
+        </article>
+      `;
+    }
+
+    function renderGuidesView(filteredGuides) {
+      const filterPills = state.searchQuery ? '' : `
+        <div class="guide-filter-row">
+          <button type="button" class="guide-pill${state.activeGuideFilter === 'all' ? ' active' : ''}" onclick="setGuideFilter('all')">All Guides (3)</button>
+          <button type="button" class="guide-pill${state.activeGuideFilter === 'probation' ? ' active' : ''}" onclick="setGuideFilter('probation')">Probation Eligibility</button>
+          <button type="button" class="guide-pill${state.activeGuideFilter === 'release' ? ' active' : ''}" onclick="setGuideFilter('release')">Release Eligibility</button>
+          <button type="button" class="guide-pill${state.activeGuideFilter === 'sor_csl' ? ' active' : ''}" onclick="setGuideFilter('sor_csl')">SOR &amp; CSL</button>
+        </div>
+      `;
+
+      const visibleGuides = filteredGuides.filter(g =>
+        state.searchQuery || state.activeGuideFilter === 'all' || state.activeGuideFilter === g.id
+      );
+
+      if (visibleGuides.length === 0) {
+        return filterPills + `
+          <div class="empty-state">
+            <h3>No matching quick reference guides</h3>
+            <p>Try clearing your search or switching to All Categories.</p>
+          </div>
+        `;
+      }
+
+      const cardsHtml = visibleGuides.map(g => {
+        const sectionsHtml = g.sections.map(sec => {
+          const statBadge = sec.statute
+            ? `<span class="statute-inline-badge">${escapeHtml(sec.statute)}</span>`
+            : '';
+          const hasSubgroups = sec.subgroups && sec.subgroups.length > 0;
+          const bodyHtml = hasSubgroups ? `
+            <div class="guide-sec-body">
+              ${sec.subgroups.map(sg => `
+                ${sg.subheader ? `<div class="guide-subhdr">${escapeHtml(sg.subheader)}</div>` : ''}
+                ${sg.items.map(it => {
+                  if (it.qualifier) {
+                    return `<div class="guide-qualifier">${escapeHtml(it.text)}</div>`;
+                  }
+                  return `<div class="guide-item"><span class="guide-bullet">&bull;</span> ${formatGuideLineHtml(it.text)}</div>`;
+                }).join('')}
+              `).join('')}
+            </div>
+          ` : '';
+
+          return `
+            <div class="guide-section">
+              <div class="guide-sec-hdr">
+                <span>${escapeHtml(sec.header)}</span>
+                ${statBadge}
+              </div>
+              ${bodyHtml}
+            </div>
+          `;
+        }).join('');
+
+        return `
+          <section class="guide-card">
+            <div class="guide-card-header">
+              <h2 class="guide-card-title">${escapeHtml(g.title)}</h2>
+            </div>
+            ${sectionsHtml}
+          </section>
+        `;
+      }).join('');
+
+      return filterPills + cardsHtml;
+    }
+
+    function render() {
+      const container = document.getElementById('main-container');
+      const metaBar = document.getElementById('search-meta-bar');
+      const resultLabel = document.getElementById('search-result-label');
+      const expandAllBtn = document.getElementById('expand-all-btn');
+      const q = state.searchQuery.trim();
+
+      // Update active tab styling
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.tab === state.activeTab);
+      });
+
+      // Update scope toggle styling
+      document.querySelectorAll('.scope-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.scope === state.searchScope);
+      });
+
+      if (q) {
+        metaBar.style.display = 'flex';
+        const baseOffenses = state.searchScope === 'tab' && state.activeTab !== 'Guides'
+          ? OFFENSES.filter(o => o.category === state.activeTab)
+          : OFFENSES;
+        const matchedOffenses = (state.searchScope === 'tab' && state.activeTab === 'Guides')
+          ? []
+          : baseOffenses.filter(o => matchesQuery(o, q));
+
+        const matchedGuides = (state.searchScope === 'all' || state.activeTab === 'Guides')
+          ? GUIDES.filter(g => guideMatchesQuery(g, q))
+          : [];
+
+        const totalHits = matchedOffenses.length + matchedGuides.length;
+        resultLabel.textContent = `${totalHits} match${totalHits === 1 ? '' : 'es'} found`;
+        expandAllBtn.style.display = matchedOffenses.length > 0 ? 'inline-block' : 'none';
+
+        if (totalHits === 0) {
+          container.innerHTML = `
+            <div class="empty-state">
+              <h3>No matching statutes or guides</h3>
+              <p>No offenses or guides matched "${escapeHtml(q)}".</p>
+            </div>
+          `;
+          return;
+        }
+
+        let html = matchedOffenses.map(o => renderOffenseCard(o, state.searchScope === 'all')).join('');
+        if (matchedGuides.length > 0) {
+          html += renderGuidesView(matchedGuides);
+        }
+        container.innerHTML = html;
+        updateExpandAllButtonLabel(matchedOffenses);
+        return;
+      }
+
+      metaBar.style.display = 'none';
+
+      if (state.activeTab === 'Guides') {
+        expandAllBtn.style.display = 'none';
+        container.innerHTML = renderGuidesView(GUIDES);
+        return;
+      }
+
+      expandAllBtn.style.display = 'inline-block';
+      const tabOffenses = OFFENSES.filter(o => o.category === state.activeTab);
+      container.innerHTML = tabOffenses.map(o => renderOffenseCard(o, false)).join('');
+      updateExpandAllButtonLabel(tabOffenses);
+    }
+
+    function updateExpandAllButtonLabel(visibleOffenses) {
+      const btn = document.getElementById('expand-all-btn');
+      if (!visibleOffenses || visibleOffenses.length === 0) return;
+      const allExpanded = visibleOffenses.every(o => state.expandedIds.has(o.id));
+      btn.textContent = allExpanded ? 'Collapse All' : 'Expand All';
+    }
+
+    window.toggleCard = function(id, event) {
+      // Avoid toggling if the user is dragging to select/copy text
+      const selection = window.getSelection();
+      if (selection && selection.toString().length > 0) {
+        return;
+      }
+      if (state.expandedIds.has(id)) {
+        state.expandedIds.delete(id);
+      } else {
+        state.expandedIds.add(id);
+      }
+      render();
+    };
+
+    window.setGuideFilter = function(filterId) {
+      state.activeGuideFilter = filterId;
+      render();
+    };
+
+    // Tab listeners
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        state.activeTab = btn.dataset.tab;
+        render();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+
+    // Search listeners
+    const searchInput = document.getElementById('search-input');
+    const clearBtn = document.getElementById('clear-search-btn');
+
+    searchInput.addEventListener('input', (e) => {
+      state.searchQuery = e.target.value;
+      clearBtn.classList.toggle('visible', state.searchQuery.length > 0);
+      render();
+    });
+
+    clearBtn.addEventListener('click', () => {
+      state.searchQuery = '';
+      searchInput.value = '';
+      clearBtn.classList.remove('visible');
+      searchInput.focus();
+      render();
+    });
+
+    document.querySelectorAll('.scope-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        state.searchScope = btn.dataset.scope;
+        render();
+      });
+    });
+
+    // Expand / Collapse All visible offenses
+    document.getElementById('expand-all-btn').addEventListener('click', () => {
+      const q = state.searchQuery.trim();
+      let visibleOffenses = [];
+      if (q) {
+        const base = (state.searchScope === 'tab' && state.activeTab !== 'Guides')
+          ? OFFENSES.filter(o => o.category === state.activeTab)
+          : OFFENSES;
+        visibleOffenses = (state.searchScope === 'tab' && state.activeTab === 'Guides')
+          ? []
+          : base.filter(o => matchesQuery(o, q));
+      } else if (state.activeTab !== 'Guides') {
+        visibleOffenses = OFFENSES.filter(o => o.category === state.activeTab);
+      }
+      if (visibleOffenses.length === 0) return;
+
+      const allExpanded = visibleOffenses.every(o => state.expandedIds.has(o.id));
+      if (allExpanded) {
+        visibleOffenses.forEach(o => state.expandedIds.delete(o.id));
+      } else {
+        visibleOffenses.forEach(o => state.expandedIds.add(o.id));
+      }
+      render();
+    });
+
+    // Offline PWA Manifest + Service Worker Setup (works automatically on GitHub Pages HTTPS)
+    (function setupOfflinePWA() {
+      const iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect width="512" height="512" rx="112" fill="#0F172A"/><rect x="44" y="44" width="424" height="424" rx="84" fill="none" stroke="#1D4ED8" stroke-width="16"/><text x="256" y="235" text-anchor="middle" fill="#FFFFFF" font-family="system-ui,sans-serif" font-weight="800" font-size="112">CAC</text><text x="256" y="340" text-anchor="middle" fill="#93C5FD" font-family="system-ui,sans-serif" font-weight="700" font-size="68">T.C.A.</text></svg>`;
+      const iconUrl = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(iconSvg);
+      document.getElementById('apple-icon').href = iconUrl;
+
+      const manifest = {
+        name: 'TN CAC Statutory Reference Guide',
+        short_name: 'TN CAC Guide',
+        description: 'Offline Tennessee CAC Statutory Reference & Quick Reference Guides',
+        start_url: '.',
+        display: 'standalone',
+        background_color: '#F1F5F9',
+        theme_color: '#0F172A',
+        icons: [
+          { src: iconUrl, sizes: '192x192', type: 'image/svg+xml' },
+          { src: iconUrl, sizes: '512x512', type: 'image/svg+xml' }
+        ]
+      };
+      const manifestBlob = new Blob([JSON.stringify(manifest)], { type: 'application/manifest+json' });
+      document.getElementById('pwa-manifest').href = URL.createObjectURL(manifestBlob);
+
+      if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
+        const swCode = `
+          const CACHE_NAME = 'tn-cac-guide-v1';
+          self.addEventListener('install', (e) => {
+            e.waitUntil(
+              caches.open(CACHE_NAME).then((cache) => cache.addAll([self.location.href.split('#')[0]]))
+            );
+            self.skipWaiting();
+          });
+          self.addEventListener('activate', (e) => {
+            e.waitUntil(self.clients.claim());
+          });
+          self.addEventListener('fetch', (e) => {
+            e.respondWith(
+              caches.match(e.request).then((cached) => {
+                const fetchPromise = fetch(e.request).then((resp) => {
+                  if (resp && resp.status === 200) {
+                    const copy = resp.clone();
+                    caches.open(CACHE_NAME).then((cache) => cache.put(e.request, copy));
+                  }
+                  return resp;
+                }).catch(() => cached);
+                return cached || fetchPromise;
+              })
+            );
+          });
+        `;
+        const swBlob = new Blob([swCode], { type: 'application/javascript' });
+        const swUrl = URL.createObjectURL(swBlob);
+        navigator.serviceWorker.register(swUrl).catch(() => {});
+      }
+    })();
+
+    // Initial render
+    render();
+  </script>
+</body>
+</html>
